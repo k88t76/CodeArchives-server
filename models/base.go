@@ -7,7 +7,7 @@ import (
 
 	// db
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/k88t76/code_archives/server/config"
+	"github.com/k88t76/CodeArchives-server/server/config"
 )
 
 const (

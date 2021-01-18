@@ -8,7 +8,7 @@ import (
 	"os"
 	"path"
 
-	"CodeArchives-server/models"
+	"github.com/k88t76/CodeArchives-server/server/models"
 )
 
 var cookie http.Cookie
