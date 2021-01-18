@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/k88t76/CodeArchives-server/server/config"
 	"github.com/k88t76/CodeArchives-server/server/controllers"
+	"github.com/k88t76/CodeArchives-server/server/utils"
 )
 
 func main() {
