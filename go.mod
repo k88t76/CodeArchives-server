@@ -1,4 +1,4 @@
-module github.com/k88t76/CodeArchives-server/
+module github.com/k88t76/CodeArchives-server
 
 go 1.15
 
