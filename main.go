@@ -1,9 +1,9 @@
 package config
 
 import (
-	"github.com/k88t76/CodeArchives-server/server/config"
-	"github.com/k88t76/CodeArchives-server/server/controllers"
-	"github.com/k88t76/CodeArchives-server/server/utils"
+	"github.com/k88t76/CodeArchives-server/config"
+	"github.com/k88t76/CodeArchives-server/controllers"
+	"github.com/k88t76/CodeArchives-server/utils"
 )
 
 func main() {
