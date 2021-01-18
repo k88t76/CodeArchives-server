@@ -9,8 +9,10 @@ import (
 
 type ConfigList struct {
 	LogFile   string
+	CloudSQL  string
 	DbAccess  string
 	DbName    string
+	Dbpass    string
 	SQLDriver string
 	Port      string
 }
@@ -26,8 +28,10 @@ func init() {
 
 	Config = ConfigList{
 		LogFile:   cfg.Section("application").Key("log_file").String(),
+		CloudSQL:  cfg.Section("db").Key("cloudSQL").String(),
 		DbAccess:  cfg.Section("db").Key("access").String(),
 		DbName:    cfg.Section("db").Key("name").String(),
+		Dbpass:    cfg.Section("db").Key("pass").String(),
 		SQLDriver: cfg.Section("db").Key("driver").String(),
 		Port:      cfg.Section("web").Key("port").String(),
 	}
