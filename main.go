@@ -1,4 +1,4 @@
-package config
+package main
 
 import (
 	"github.com/k88t76/CodeArchives-server/config"
