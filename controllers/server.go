@@ -1,10 +1,14 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"path"
+
+	"github.com/k88t76/CodeArchives-server/models"
 )
 
 var cookie http.Cookie
@@ -16,17 +20,15 @@ func StartWebServer() {
 	*/
 	http.HandleFunc("/", indexHandler)
 
-	/*
-		http.HandleFunc("/archive/", handleRequest)
-		http.HandleFunc("/archives", hR)
-		http.HandleFunc("/archive/c", hRc)
-		http.HandleFunc("/edit/", hRe)
-		http.HandleFunc("/delete/", hRd)
-		http.HandleFunc("/search/", hRs)
-		http.HandleFunc("/signin", hRsignIn)
-		http.HandleFunc("/signup", hRsignUp)
-		http.HandleFunc("/signout", hRsignOut)
-	*/
+	http.HandleFunc("/archive/", handleRequest)
+	http.HandleFunc("/archives", hR)
+	http.HandleFunc("/archive/c", hRc)
+	http.HandleFunc("/edit/", hRe)
+	http.HandleFunc("/delete/", hRd)
+	http.HandleFunc("/search/", hRs)
+	http.HandleFunc("/signin", hRsignIn)
+	http.HandleFunc("/signup", hRsignUp)
+	http.HandleFunc("/signout", hRsignOut)
 	// [START setting_port]
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -49,7 +51,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello, World!")
 }
 
-/*
 func hR(w http.ResponseWriter, r *http.Request) {
 	err := handleGetAll(w, r)
 	if err != nil {
@@ -283,4 +284,3 @@ func handleDelete(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(200)
 	return nil
 }
-*/
