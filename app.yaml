@@ -1,4 +1,3 @@
-application: codearchives-server
 runtime: go115
 
 handlers:
