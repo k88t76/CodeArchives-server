@@ -3,7 +3,6 @@ package models
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	// db
 	_ "github.com/go-sql-driver/mysql"
@@ -22,7 +21,7 @@ func init() {
 	var err error
 	db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
 	}
 
 	name := config.Config.DbName
@@ -30,13 +29,13 @@ func init() {
 	cmd := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", name)
 	_, err = db.Exec(cmd)
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
 	}
 
 	cmd = fmt.Sprintf("USE %s", name)
 	_, err = db.Exec(cmd)
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
 	}
 
 	// create notebooksTable
