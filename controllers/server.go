@@ -3,7 +3,9 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"path"
 
 	"github.com/k88t76/code_archives/server/models"
@@ -13,9 +15,12 @@ var cookie http.Cookie
 
 func StartWebServer() {
 	fmt.Println("Server 8080")
-	server := http.Server{
+	/*server := http.Server{
 		Addr: "127.0.0.1:8080",
 	}
+	*/
+	http.HandleFunc("/", indexHandler)
+
 	http.HandleFunc("/archive/", handleRequest)
 	http.HandleFunc("/archives", hR)
 	http.HandleFunc("/archive/c", hRc)
@@ -25,7 +30,26 @@ func StartWebServer() {
 	http.HandleFunc("/signin", hRsignIn)
 	http.HandleFunc("/signup", hRsignUp)
 	http.HandleFunc("/signout", hRsignOut)
-	server.ListenAndServe()
+	// [START setting_port]
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Printf("Defaulting to port %s", port)
+	}
+
+	log.Printf("Listening on port %s", port)
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatal(err)
+	}
+	// [END setting_port]
+}
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+	fmt.Fprint(w, "Hello, World!")
 }
 
 func hR(w http.ResponseWriter, r *http.Request) {
