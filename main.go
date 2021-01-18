@@ -1,17 +1,20 @@
 package main
 
 import (
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+
 	"github.com/k88t76/code_archives/server/config"
-	"github.com/k88t76/code_archives/server/controllers"
 	"github.com/k88t76/code_archives/server/utils"
 )
 
 func main() {
 	utils.LoggingSettings(config.Config.LogFile)
-	controllers.StartWebServer()
-}
+	//controllers.StartWebServer()
 
-/*http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/", indexHandler)
 
 	// [START setting_port]
 	port := os.Getenv("PORT")
@@ -35,4 +38,3 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprint(w, "Hello, World!")
 }
-*/
