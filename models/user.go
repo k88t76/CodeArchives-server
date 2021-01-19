@@ -91,7 +91,8 @@ func SessionDeleteAll() error {
 func (u *User) Create() error {
 	u.UUID = CreateUUID()
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, name, password, created_at) VALUES (?, ?, ?, ?)", tableNameUsers)
-	_, err := db.Exec(cmd, u.UUID, u.Name, Encrypt(u.Password), time.Now().Format(time.RFC3339))
+	//_, err := db.Exec(cmd, u.UUID, u.Name, Encrypt(u.Password), time.Now().Format(time.RFC3339))
+	_, err := db.Exec(cmd, "testgo", "tester", "test", "2021-01-01")
 	if err != nil {
 		return err
 	}
