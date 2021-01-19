@@ -195,6 +195,7 @@ func handleSignIn(w http.ResponseWriter, r *http.Request) error {
 	if check {
 		fmt.Println("check OK")
 		err := u.CreateSession()
+		fmt.Printf("u : %v\n", u)
 		if err != nil {
 			return err
 		}
@@ -224,6 +225,8 @@ func handleSignUp(w http.ResponseWriter, r *http.Request) error {
 	fmt.Printf("r.Body: %v\n", r.Body)
 	var user models.User
 	json.Unmarshal(body, &user)
+	fmt.Println(user.Name)
+	fmt.Printf("user: %v\n", user)
 	err := user.Create()
 	u, check := models.CheckUser(user)
 	if check && err == nil {
