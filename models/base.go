@@ -20,13 +20,16 @@ var db *sql.DB
 
 func init() {
 	var err error
-	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/", config.Config.Dbpass, config.Config.CloudSQL))
+	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives", config.Config.Dbpass, config.Config.CloudSQL))
 
 	/*db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
 	if err != nil {
 		fmt.Println(err)
 	}
 	*/
+	if err != nil {
+		panic(err)
+	}
 
 	name := config.Config.DbName
 
@@ -36,11 +39,13 @@ func init() {
 		fmt.Println(err)
 	}
 
-	cmd = fmt.Sprintf("USE %s", name)
-	_, err = db.Exec(cmd)
-	if err != nil {
-		fmt.Println(err)
-	}
+	/*
+		cmd = fmt.Sprintf("USE %s", name)
+		_, err = db.Exec(cmd)
+		if err != nil {
+			fmt.Println(err)
+		}
+	*/
 
 	// create notebooksTable
 	cmd = fmt.Sprintf(`
