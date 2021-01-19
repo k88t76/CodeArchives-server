@@ -38,7 +38,7 @@ func GetArchive(uuid string) *Archive {
 	if err != nil {
 		return nil
 	}
-	archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
+	//archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
 	return NewArchive(archive.ID, archive.UUID, archive.Content, archive.Title, archive.Author, archive.Language, archive.CreatedAt)
 }
 
@@ -59,7 +59,7 @@ func TestArchives() ([]Archive, error) {
 		if err != nil {
 			return nil, err
 		}
-		archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
+		//archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
 		archives = append(archives, archive)
 	}
 	return archives, nil
@@ -82,7 +82,7 @@ func GetArchivesByUser(userName string, limit int) ([]Archive, error) {
 		if err != nil {
 			return nil, err
 		}
-		archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
+		//archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
 		archives = append(archives, archive)
 	}
 	return archives, nil
@@ -115,7 +115,7 @@ func GetMatchArchive(search string, userName string) ([]Archive, error) {
 		if err != nil {
 			return nil, err
 		}
-		archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
+		//archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
 		archives = append(archives, archive)
 	}
 	return archives, nil
@@ -124,7 +124,7 @@ func GetMatchArchive(search string, userName string) ([]Archive, error) {
 
 func (a *Archive) Create() error {
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
-	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().Format(time.RFC3339))
+	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, "2021-01-01")
 	if err != nil {
 		return err
 	}

@@ -3,7 +3,6 @@ package models
 import (
 	"crypto/sha256"
 	"fmt"
-	"time"
 )
 
 // Session is
@@ -112,7 +111,7 @@ func (u *User) CreateTmpUser() error {
 // CreateSession is
 func (u *User) CreateSession() error {
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, user_id, user_name, created_at) VALUES (?, ?, ?, ?)", tableNameSessions)
-	_, err := db.Exec(cmd, CreateUUID(), u.UUID, u.Name, time.Now().Format(time.RFC3339))
+	_, err := db.Exec(cmd, CreateUUID(), u.UUID, u.Name, "2021-01-01")
 	return err
 }
 
