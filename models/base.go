@@ -22,14 +22,12 @@ func init() {
 	var err error
 	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives?parseTime=true", config.Config.Dbpass, config.Config.CloudSQL))
 
+	// db connection for local
 	/*db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
 	if err != nil {
 		fmt.Println(err)
 	}
 	*/
-	if err != nil {
-		panic(err)
-	}
 
 	name := config.Config.DbName
 
@@ -47,7 +45,7 @@ func init() {
 		}
 	*/
 
-	// create notebooksTable
+	// create archivesTable
 	cmd = fmt.Sprintf(`
 			CREATE TABLE IF NOT EXISTS %s (
 			id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -69,6 +67,7 @@ func init() {
 			created_at DATETIME)`, tableNameUsers)
 	db.Exec(cmd)
 
+	// create sessionsTable
 	cmd = fmt.Sprintf(`
 			CREATE TABLE IF NOT EXISTS %s (
 			id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,

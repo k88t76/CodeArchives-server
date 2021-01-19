@@ -14,22 +14,15 @@ import (
 var cookie http.Cookie
 
 func StartWebServer() {
-	/*server := http.Server{
-		Addr: "127.0.0.1:8080",
-	}
-	*/
-
-	http.HandleFunc("/", indexHandler)
-
 	http.HandleFunc("/archive/", handleRequest)
-	http.HandleFunc("/archives", hR)
-	http.HandleFunc("/archive/c", hRc)
-	http.HandleFunc("/edit/", hRe)
-	http.HandleFunc("/delete/", hRd)
-	http.HandleFunc("/search/", hRs)
-	http.HandleFunc("/signin", hRsignIn)
-	http.HandleFunc("/signup", hRsignUp)
-	http.HandleFunc("/signout", hRsignOut)
+	http.HandleFunc("/archives", handleGetAll)
+	http.HandleFunc("/archive/c", handleCreate)
+	http.HandleFunc("/edit/", handleEdit)
+	http.HandleFunc("/delete/", handleDelete)
+	http.HandleFunc("/search/", handleSearch)
+	http.HandleFunc("/signin", handleSignIn)
+	http.HandleFunc("/signup", handleSignUp)
+	http.HandleFunc("/signout", handleSignOut)
 	// [START setting_port]
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -39,94 +32,86 @@ func StartWebServer() {
 
 	log.Printf("Listening on port %s", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {
-		//log.Fatal(err)
+		log.Fatal(err)
 	}
 	// [END setting_port]
-}
-
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
-	}
-	fmt.Fprint(w, "Hello, World!")
-}
-
-func hR(w http.ResponseWriter, r *http.Request) {
-	err := handleGetAll(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-}
-
-func hRc(w http.ResponseWriter, r *http.Request) {
-	err := handlePost(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func hRe(w http.ResponseWriter, r *http.Request) {
-	err := handlePut(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func hRd(w http.ResponseWriter, r *http.Request) {
-	err := handleDelete(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func hRs(w http.ResponseWriter, r *http.Request) {
-	err := handleSearch(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func hRsignIn(w http.ResponseWriter, r *http.Request) {
-	err := handleSignIn(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func hRsignUp(w http.ResponseWriter, r *http.Request) {
-	err := handleSignUp(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func hRsignOut(w http.ResponseWriter, r *http.Request) {
-	err := handleSignOut(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	var err error
 	switch r.Method {
 	case "GET":
-		err = handleGet(w, r)
+		err = Get(w, r)
 	case "POST":
-		err = handlePost(w, r)
+		//err = handlePost(w, r)
 	case "PUT":
-		err = handlePut(w, r)
+		//err = handlePut(w, r)
 	case "DELETE":
-		err = handleDelete(w, r)
+		//err = handleDelete(w, r)
 	}
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
 
-func handleGetAll(w http.ResponseWriter, r *http.Request) error {
+func handleGetAll(w http.ResponseWriter, r *http.Request) {
+	err := GetAll(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+}
+
+func handleCreate(w http.ResponseWriter, r *http.Request) {
+	err := Create(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleEdit(w http.ResponseWriter, r *http.Request) {
+	err := Edit(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleDelete(w http.ResponseWriter, r *http.Request) {
+	err := Delete(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleSearch(w http.ResponseWriter, r *http.Request) {
+	err := Search(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleSignIn(w http.ResponseWriter, r *http.Request) {
+	err := SignIn(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleSignUp(w http.ResponseWriter, r *http.Request) {
+	err := SignUp(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleSignOut(w http.ResponseWriter, r *http.Request) {
+	err := SignOut(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func GetAll(w http.ResponseWriter, r *http.Request) error {
 	fmt.Printf("cookie: %v\n", cookie)
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -147,7 +132,7 @@ func handleGetAll(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func handleGet(w http.ResponseWriter, r *http.Request) error {
+func Get(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -163,7 +148,7 @@ func handleGet(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func handleSearch(w http.ResponseWriter, r *http.Request) error {
+func Search(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -180,7 +165,7 @@ func handleSearch(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func handleSignIn(w http.ResponseWriter, r *http.Request) error {
+func SignIn(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -209,11 +194,15 @@ func handleSignIn(w http.ResponseWriter, r *http.Request) error {
 		http.SetCookie(w, &cookie)
 		w.WriteHeader(200)
 		fmt.Printf("cookie Value: %v\n", cookie.Value)
+	} else {
+		output, _ := json.MarshalIndent("Failed SignIn", "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
 	}
 	return nil
 }
 
-func handleSignUp(w http.ResponseWriter, r *http.Request) error {
+func SignUp(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -245,11 +234,15 @@ func handleSignUp(w http.ResponseWriter, r *http.Request) error {
 		http.SetCookie(w, &cookie)
 		w.WriteHeader(200)
 		fmt.Printf("cookie Value: %v\n", cookie.Value)
+	} else {
+		output, _ := json.MarshalIndent("UnLogin", "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
 	}
 	return nil
 }
 
-func handleSignOut(w http.ResponseWriter, r *http.Request) error {
+func SignOut(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -264,7 +257,7 @@ func handleSignOut(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func handlePost(w http.ResponseWriter, r *http.Request) error {
+func Create(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -284,7 +277,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func handlePut(w http.ResponseWriter, r *http.Request) error {
+func Edit(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
@@ -305,7 +298,7 @@ func handlePut(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-func handleDelete(w http.ResponseWriter, r *http.Request) error {
+func Delete(w http.ResponseWriter, r *http.Request) error {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
