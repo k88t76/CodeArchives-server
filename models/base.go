@@ -20,7 +20,7 @@ var db *sql.DB
 
 func init() {
 	var err error
-	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives?parseTime=True", config.Config.Dbpass, config.Config.CloudSQL))
+	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives", config.Config.Dbpass, config.Config.CloudSQL))
 
 	/*db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
 	if err != nil {
