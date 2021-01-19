@@ -3,6 +3,7 @@ package models
 import (
 	"crypto/sha256"
 	"fmt"
+	"log"
 	"time"
 )
 
@@ -167,11 +168,14 @@ func CheckUser(user User) (User, bool) {
 	cmd := fmt.Sprintf("SELECT uuid, name FROM %s WHERE name = ?", tableNameUsers)
 	row := db.QueryRow(cmd, user.Name)
 	var u User
-	err := row.Scan(&u.UUID, &u.Name)
-	fmt.Printf("user: %v\n", u)
-	if err != nil {
+	if row == nil {
 		return u, false
 	}
+	err := row.Scan(&u.UUID, &u.Name)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("user: %v\n", u)
 	return u, true
 }
 
