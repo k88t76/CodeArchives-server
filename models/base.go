@@ -4,8 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 
-	"google.golang.org/appengine"
-
 	"github.com/k88t76/CodeArchives-server/config"
 
 	// db
@@ -22,15 +20,13 @@ var db *sql.DB
 
 func init() {
 	var err error
-	if appengine.IsAppEngine() {
-		db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives?parseTime=True", config.Config.Dbpass, config.Config.CloudSQL))
-	} else {
+	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives?parseTime=True", config.Config.Dbpass, config.Config.CloudSQL))
 
-	}
-	db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
+	/*db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
 	if err != nil {
 		fmt.Println(err)
 	}
+	*/
 
 	name := config.Config.DbName
 
