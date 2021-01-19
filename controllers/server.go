@@ -204,6 +204,8 @@ func handleSignUp(w http.ResponseWriter, r *http.Request) error {
 	body := make([]byte, len)
 	r.Body.Read(body)
 	fmt.Printf("Post body: %v\n", body)
+	fmt.Printf("r.Method: %v\n", r.Method)
+	fmt.Printf("r.Body: %v\n", r.Body)
 	var user models.User
 	json.Unmarshal(body, &user)
 	err := user.Create()
