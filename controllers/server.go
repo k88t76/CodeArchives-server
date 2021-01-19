@@ -18,6 +18,7 @@ func StartWebServer() {
 		Addr: "127.0.0.1:8080",
 	}
 	*/
+
 	http.HandleFunc("/", indexHandler)
 
 	http.HandleFunc("/archive/", handleRequest)
@@ -127,6 +128,9 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 func handleGetAll(w http.ResponseWriter, r *http.Request) error {
 	fmt.Printf("cookie: %v\n", cookie)
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	if cookie.Value != "" {
 		fmt.Println("cookie_detect!")
 		userName := models.GetUserNameBySessionID(cookie.Value)
@@ -144,6 +148,9 @@ func handleGetAll(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handleGet(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	uuid := path.Base(r.URL.Path)
 
 	archive := models.GetArchive(uuid)
@@ -157,6 +164,9 @@ func handleGet(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handleSearch(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	userName := models.GetUserNameBySessionID(cookie.Value)
 	word := path.Base(r.URL.Path)
 	fmt.Printf("serch: %v\n", word)
@@ -171,6 +181,9 @@ func handleSearch(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handleSignIn(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -200,6 +213,9 @@ func handleSignIn(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handleSignUp(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -231,6 +247,9 @@ func handleSignUp(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handleSignOut(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	cookie = http.Cookie{
 		Name:     "_cookie",
 		Value:    "",
@@ -243,6 +262,9 @@ func handleSignOut(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handlePost(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -260,6 +282,9 @@ func handlePost(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handlePut(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	uuid := path.Base(r.URL.Path)
 	fmt.Printf("[Edit] uuid: %v\n", uuid)
 	archive := models.GetArchive(uuid)
@@ -278,6 +303,9 @@ func handlePut(w http.ResponseWriter, r *http.Request) error {
 }
 
 func handleDelete(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	uuid := path.Base(r.URL.Path)
 	fmt.Printf("uuid: %v\n", uuid)
 	archive := models.GetArchive(uuid)
