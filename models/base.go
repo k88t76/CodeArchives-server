@@ -23,7 +23,7 @@ var db *sql.DB
 func init() {
 	var err error
 	if appengine.IsAppEngine() {
-		db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@(unix/cloudsql/%s)/fs14db01?parseTime=True&", config.Config.Dbpass, config.Config.CloudSQL))
+		db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives?parseTime=True", config.Config.Dbpass, config.Config.CloudSQL))
 	} else {
 
 	}

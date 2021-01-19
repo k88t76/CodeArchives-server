@@ -145,6 +145,7 @@ func handleGetAll(w http.ResponseWriter, r *http.Request) error {
 
 func handleGet(w http.ResponseWriter, r *http.Request) error {
 	uuid := path.Base(r.URL.Path)
+
 	archive := models.GetArchive(uuid)
 	output, err := json.MarshalIndent(&archive, "", "\t\t")
 	if err != nil {
@@ -202,6 +203,7 @@ func handleSignUp(w http.ResponseWriter, r *http.Request) error {
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
+	fmt.Printf("Post body: %v\n", body)
 	var user models.User
 	json.Unmarshal(body, &user)
 	err := user.Create()
@@ -242,6 +244,7 @@ func handlePost(w http.ResponseWriter, r *http.Request) error {
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
+	fmt.Printf("Post body: %v\n", body)
 	var archive models.Archive
 	json.Unmarshal(body, &archive)
 	userName := models.GetUserNameBySessionID(cookie.Value)
