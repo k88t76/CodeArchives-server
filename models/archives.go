@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"strings"
-	"time"
 )
 
 type Archive struct {
@@ -133,7 +132,7 @@ func (a *Archive) Create() error {
 
 func (a *Archive) Update() error {
 	cmd := fmt.Sprintf("UPDATE %s SET content = ?, title = ?, language = ?, created_at = ? WHERE uuid = ?", tableNameArchives)
-	_, err := db.Exec(cmd, a.Content, a.Title, a.Language, time.Now().Format(time.RFC3339), a.UUID)
+	_, err := db.Exec(cmd, a.Content, a.Title, a.Language, "2021-01-01", a.UUID)
 	if err != nil {
 		return err
 	}
