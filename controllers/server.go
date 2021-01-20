@@ -58,13 +58,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleGetAll(w http.ResponseWriter, r *http.Request) {
-	cookie = http.Cookie{
-		Name:     "_cookie",
-		Value:    "",
-		HttpOnly: true,
-	}
-	http.SetCookie(w, &cookie)
-	w.WriteHeader(200)
+
 	err := GetAll(w, r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
