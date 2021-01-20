@@ -1,7 +1,7 @@
 Code Archivesのサーバーサイドコードです
 
 【使用技術】  
-- 言語：　go 1.15.2  
+- 言語： go 1.15.2  
 - データベース: MySQL 8.0(CloudSQL)  
 - デプロイ： Google App Engine
 
