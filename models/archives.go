@@ -41,30 +41,6 @@ func GetArchive(uuid string) *Archive {
 	return NewArchive(archive.ID, archive.UUID, archive.Content, archive.Title, archive.Author, archive.Language, archive.CreatedAt)
 }
 
-func TestArchives() ([]Archive, error) {
-	var archives []Archive
-	cmd := fmt.Sprintf(`SELECT id, uuid, content, title, author, language, created_at FROM %s ORDER BY created_at DESC`, tableNameArchives)
-	rows, err := db.Query(cmd)
-	fmt.Println(rows)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var archive Archive
-		rows.Scan(&archive.ID, &archive.UUID, &archive.Content, &archive.Title, &archive.Author, &archive.Language, &archive.CreatedAt)
-		err = rows.Err()
-		if err != nil {
-			return nil, err
-		}
-		//archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
-		archives = append(archives, archive)
-	}
-	return archives, nil
-
-}
-
 func GetArchivesByUser(userName string, limit int) ([]Archive, error) {
 	var archives []Archive
 	cmd := fmt.Sprintf(`SELECT id, uuid, content, title, author, language, created_at FROM %s WHERE author = ? ORDER BY created_at DESC LIMIT ?`, tableNameArchives)
@@ -146,6 +122,29 @@ func (a *Archive) Delete() error {
 		return err
 	}
 	return nil
+}
+
+func GetTestArchives() ([]Archive, error) {
+	var archives []Archive
+	cmd := fmt.Sprintf(`SELECT id, uuid, content, title, author, language, created_at FROM %s  WHERE author = ? ORDER BY created_at DESC`, tableNameArchives)
+	rows, err := db.Query(cmd, "test-user")
+	fmt.Println(rows)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var archive Archive
+		rows.Scan(&archive.ID, &archive.UUID, &archive.Content, &archive.Title, &archive.Author, &archive.Language, &archive.CreatedAt)
+		err = rows.Err()
+		if err != nil {
+			return nil, err
+		}
+		//archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
+		archives = append(archives, archive)
+	}
+	return archives, nil
 }
 
 func CreateUUID() string {

@@ -23,6 +23,9 @@ func StartWebServer() {
 	http.HandleFunc("/signin", handleSignIn)
 	http.HandleFunc("/signup", handleSignUp)
 	http.HandleFunc("/signout", handleSignOut)
+
+	http.HandleFunc("/testsignin", handleTestSignIn)
+
 	// [START setting_port]
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -55,6 +58,13 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleGetAll(w http.ResponseWriter, r *http.Request) {
+	cookie = http.Cookie{
+		Name:     "_cookie",
+		Value:    "",
+		HttpOnly: true,
+	}
+	http.SetCookie(w, &cookie)
+	w.WriteHeader(200)
 	err := GetAll(w, r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -106,6 +116,13 @@ func handleSignUp(w http.ResponseWriter, r *http.Request) {
 
 func handleSignOut(w http.ResponseWriter, r *http.Request) {
 	err := SignOut(w, r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleTestSignIn(w http.ResponseWriter, r *http.Request) {
+	err := TestSignIn(w, r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -311,5 +328,16 @@ func Delete(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 	w.WriteHeader(200)
+	return nil
+}
+
+func TestSignIn(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+	archives, _ := models.GetTestArchives()
+	output, _ := json.MarshalIndent(&archives, "", "\t\t")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
 	return nil
 }
