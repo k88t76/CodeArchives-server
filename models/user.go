@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-// Session is
 type Session struct {
 	ID        int64  `json:"id"`
 	UUID      string `json:"uuid"`
@@ -16,7 +15,6 @@ type Session struct {
 	CreatedAt string `json:"createdAt"`
 }
 
-// User is
 type User struct {
 	ID        int64  `json:"id"`
 	UUID      string `json:"uuid"`
@@ -47,8 +45,6 @@ func NewSession(id int64, uuid string, token string, userID string, createdAt st
 
 func (s *Session) Check() (valid bool, err error) {
 	cmd := fmt.Sprintf("SELECT id, uuid, token, user_id, created_at FROM %s WHERE uuid = ?", tableNameSessions)
-	//err = Db.QueryRow("SELECT id, uuid, email, user_id, created_at FROM sessions WHERE uuid = $1", session.Uuid).
-	//	Scan(&session.Id, &session.Uuid, &session.Email, &session.token, &session.CreatedAt)
 	row := db.QueryRow(cmd, s.UUID)
 	err = row.Scan(&s.ID, &s.UUID, &s.Token, &s.UserID, &s.CreatedAt)
 	if err != nil {
@@ -59,21 +55,9 @@ func (s *Session) Check() (valid bool, err error) {
 	return valid, err
 }
 
-/*func (s *Session) DeleteByUUID() error {
-	//statement := "delete from sessions where uuid = $1"
-	cmd := fmt.Sprintf("DELETE FROM %s WHERE uuid = ?", tableNameSessions)
-	//stmt, err := Db.Prepare(statement)
-	_, err := db.Exec(cmd, s.UUID)
-	if err != nil {
-		return err
-	}
-	return err
-}
-*/
-
 func GetUser(sessionUUID string) *User {
 	cmd := fmt.Sprintf("SELECT id, uuid, name, password, created_at FROM %s WHERE uuid = ?", tableNameUsers)
-	//err = Db.QueryRow("SELECT uuid, name, email, created_at FROM users WHERE id = $1", session.token).
+
 	row := db.QueryRow(cmd, sessionUUID)
 	var user User
 	err := row.Scan(&user.ID, &user.UUID, &user.Name, &user.Password, &user.CreatedAt)
@@ -82,13 +66,6 @@ func GetUser(sessionUUID string) *User {
 	}
 	return NewUser(user.ID, user.UUID, user.Name, user.Password, user.CreatedAt)
 }
-
-/*func SessionDeleteAll() error {
-	cmd := fmt.Sprintf("DELETE FROM %s", tableNameSessions)
-	_, err := db.Exec(cmd)
-	return err
-}
-*/
 
 func (u *User) Create() error {
 	u.UUID = CreateUUID()
@@ -100,18 +77,6 @@ func (u *User) Create() error {
 	return err
 }
 
-/*
-func (u *User) CreateTmpUser() error {
-	cmd := fmt.Sprintf("INSERT INTO %s (uuid, created_at) VALUES (?, ?)", tableNameTemporaryUsers)
-	_, err := db.Exec(cmd, u.UUID, time.Now().Format(time.RFC3339))
-	if err != nil {
-		return err
-	}
-	return err
-}
-*/
-
-// CreateSession is
 func (u *User) CreateSession() (string, error) {
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, token, user_id, created_at) VALUES (?, ?, ?, ?)", tableNameSessions)
 	token := CreateUUID()
@@ -131,7 +96,6 @@ func (u *User) Validate() bool {
 	}
 }
 
-// Get the session for an existing user
 func GetSession(uUUID string) *Session {
 	cmd := fmt.Sprintf("SELECT id, uuid, token, user_id, created_at FROM %s WHERE user_id = ?", tableNameSessions)
 	//err = Db.QueryRow("SELECT id, uuid, email, user_id, created_at FROM sessions WHERE user_id = $1", user.Id).
@@ -144,7 +108,6 @@ func GetSession(uUUID string) *Session {
 	return NewSession(session.ID, session.UUID, session.Token, session.UserID, session.CreatedAt)
 }
 
-// Delete user from database
 func (u *User) Delete() error {
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE UUID = ?", tableNameUsers)
 	//statement := "delete from users where id = $1"
@@ -155,72 +118,14 @@ func (u *User) Delete() error {
 	return err
 }
 
-// Update user information in the database
 func (u *User) Update() error {
 	cmd := fmt.Sprintf("UPDATE %s SET name = ? WHERE uuid = ?", tableNameUsers)
-	//statement := "update users set name = $2, email = $3 where id = $1"
 	_, err := db.Exec(cmd, u.Name, u.UUID)
 	if err != nil {
 		return err
 	}
 	return err
 }
-
-/*
-// Delete all users from database
-func UserDeleteAll() error {
-	cmd := fmt.Sprintf("DELETE FROM %s", tableNameUsers)
-	_, err := db.Exec(cmd)
-	return err
-}
-*/
-
-/*
-// Get all users in the database and returns it
-func Users() (users []User, err error) {
-	rows, err := Db.Query("SELECT id, uuid, name, email, password, created_at FROM users")
-	if err != nil {
-		return
-	}
-	for rows.Next() {
-		user := User{}
-		if err = rows.Scan(&user.Id, &user.Uuid, &user.Name, &user.Email, &user.Password, &user.CreatedAt); err != nil {
-			return
-		}
-		users = append(users, user)
-	}
-	rows.Close()
-	return
-}
-*/
-
-// Get a single user given the UUID
-/*func UserBySessionID(sessionID string) *User {
-	session := GetSession(sessionID)
-	token := session.Token
-	cmd := fmt.Sprintf("SELECT id, uuid, name, password, created_at FROM %s WHERE uuid = ?", tableNameUsers)
-	row := db.QueryRow(cmd, token)
-	var user User
-	//err = Db.QueryRow("SELECT id, uuid, name, email, password, created_at FROM users WHERE uuid = $1", uuid).
-	_ = row.Scan(&user.ID, &user.UUID, &user.Name, &user.Password, &user.CreatedAt)
-	//if err != nil {
-	//	return nil
-	//}
-	return NewUser(user.ID, user.UUID, user.Name, user.Password, user.CreatedAt)
-}
-
-func SessionByUUID(uuid string) *Session {
-	cmd := fmt.Sprintf("SELECT uuid, token, user_id, created_at FROM %s WHERE uuid = ?", tableNameSessions)
-	row := db.QueryRow(cmd, uuid)
-	var session Session
-	//err = Db.QueryRow("SELECT id, uuid, name, email, password, created_at FROM users WHERE uuid = $1", uuid).
-	err := row.Scan(&session.ID, &session.UUID, &session.Token, &session.UserID, &session.CreatedAt)
-	if err != nil {
-		return nil
-	}
-	return NewSession(session.ID, session.UUID, session.Token, session.UserID, session.CreatedAt)
-}
-*/
 
 func CheckUser(user User) (string, bool) {
 	cmd := fmt.Sprintf("SELECT uuid FROM %s WHERE name = ? AND password = ?", tableNameUsers)
@@ -244,18 +149,6 @@ func UpdateToken(userID string) (string, error) {
 	}
 	return token, nil
 }
-
-/*func GetUserNameBySessionID(sessionID string) string {
-	cmd := fmt.Sprintf("SELECT user_name FROM %s WHERE uuid = ?", tableNameSessions)
-	row := db.QueryRow(cmd, sessionID)
-	var userName string
-	err := row.Scan(&userName)
-	if err != nil {
-		return ""
-	}
-	return userName
-}
-*/
 
 func GetUserNameByToken(token string) (string, error) {
 	cmd := fmt.Sprintf("SELECT users.name FROM sessions LEFT JOIN users on sessions.user_id = users.uuid WHERE token = ?")

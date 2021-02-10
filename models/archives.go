@@ -167,26 +167,72 @@ func CreateTestArchives() {
 			Author:   "test-user",
 			Language: "go",
 		},
-		{Content: `from sklearn import neighbors, datasets, preprocessing
-		from sklearn.model_selection import train_test_split
-		from sklearn.metrics import accuracy_score
-		
-		iris = datasets.load_iris()
-		X, y = iris.data[:, :2], iris.target
-		X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=33)
-		
-		scaler = preprocessing.StandardScaler().fit(X_train)
-		X_train = scaler.transform(X_train)
-		X_test = scaler.transform(X_test)
-		
-		knn = neighbors.KNeighborsClassifier(n_neighbors=5)
-		knn.fit(X_train, y_train)
-		y_pred = knn.predict(X_test)
-		accuracy_score(y_test, y_pred)
-		`,
-			Title:    "Scikit-Learn",
+		{Content: `---
+		apiVersion: v1
+		kind: ConfigMap
+		metadata:
+		  name: init-db-sql
+		data:
+		  create_usertable.sql: |
+			CREATE TABLE IF NOT EXISTS mydb.users (id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, name VARCHAR(50));
+		---
+		apiVersion: v1
+		kind: Pod
+		metadata:
+		  name: sample-pod
+		  labels:
+			role: all-in-one
+		spec:
+		  containers:
+		  - name: app-container
+			image: masayaaoyama/flexy-demo-app:v1.0
+			imagePullPolicy: Always
+			env:
+			- name: DBHOST
+			  value: 127.0.0.1
+			- name: DBPORT
+			  value: "3306"
+			- name: DBUSER
+			  value: myuser
+			- name: DBPASS
+			  value: mypass
+			- name: DBNAME
+			  value: mydb
+		  - name: mysql-container
+			image: mysql:8.0
+			env:
+			- name: MYSQL_ROOT_PASSWORD
+			  value: rootpass
+			- name: MYSQL_DATABASE
+			  value: mydb
+			- name: MYSQL_USER
+			  value: myuser
+			- name: MYSQL_PASSWORD
+			  value: mypass
+			volumeMounts:
+			- name: init-sql-configmap
+			  mountPath: /docker-entrypoint-initdb.d
+		  volumes:
+			- name: init-sql-configmap
+			  configMap:
+				name: init-db-sql
+		---
+		apiVersion: v1
+		kind: Service
+		metadata:
+		  name: flexy-demo-all-in-one
+		spec:
+		  type: LoadBalancer
+		  ports:
+			- name: "http-port"
+			  protocol: "TCP"
+			  port: 8080
+			  targetPort: 8080
+		  selector:
+			role: all-in-one`,
+			Title:    "pod.yaml",
 			Author:   "test-user",
-			Language: "python",
+			Language: "yaml",
 		},
 		{Content: `SELECT 
 		CONVERT(int, SUBSTRING(MIN(jis_code), 1, 2)) AS id
@@ -454,6 +500,22 @@ func CreateTestArchives() {
 			Title:    "algorithm",
 			Author:   "test-user",
 			Language: "go",
+		},
+		{Content: `import numpy as np
+		import math
+		 
+		def is_prime(n):
+			if n % 2 == 0 and n > 2: 
+				return False
+			return all(n % i for i in range(3, int(math.sqrt(n)) + 1, 2))
+		 
+		arr = np.arange(2, 21)
+		vec = np.vectorize(is_prime)
+		print(vec(arr))
+		print(arr[vec(arr)])`,
+			Title:    "prime.py",
+			Author:   "test-user",
+			Language: "python",
 		},
 	}
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE author = ?", tableNameArchives)

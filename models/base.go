@@ -44,7 +44,7 @@ func init() {
 		log.Fatalln(err)
 	}
 
-	// create notebooksTable
+	// create archivesTable
 	cmd = fmt.Sprintf(`
 		CREATE TABLE IF NOT EXISTS %s (
 		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -66,6 +66,7 @@ func init() {
 		created_at VARCHAR(255))`, tableNameUsers)
 	db.Exec(cmd)
 
+	// create sessionsTable
 	cmd = fmt.Sprintf(`
 		CREATE TABLE IF NOT EXISTS %s (
 		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
