@@ -53,7 +53,7 @@ func init() {
 		title VARCHAR(255) NOT NULL,
 		author VARCHAR(255),
 		language VARCHAR(255),
-		created_at DATETIME)`, tableNameArchives)
+		created_at VARCHAR(255))`, tableNameArchives)
 	db.Exec(cmd)
 
 	// create usersTable
@@ -63,7 +63,7 @@ func init() {
 		uuid VARCHAR(36) NOT NULL, 
 		name VARCHAR(255),
 		password VARCHAR(255),
-		created_at DATETIME)`, tableNameUsers)
+		created_at VARCHAR(255))`, tableNameUsers)
 	db.Exec(cmd)
 
 	cmd = fmt.Sprintf(`
@@ -72,6 +72,6 @@ func init() {
 		uuid VARCHAR(36) NOT NULL, 
 		token VARCHAR(36),
 		user_id VARCHAR(36),
-		created_at DATETIME)`, tableNameSessions)
+		created_at VARCHAR(255))`, tableNameSessions)
 	db.Exec(cmd)
 }
