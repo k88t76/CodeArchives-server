@@ -41,7 +41,7 @@ func StartWebServer() {
 
 func t(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello, World!")
-	fmt.Fprint(w, time.Now())
+	fmt.Fprint(w, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"))
 }
 
 func getAll(w http.ResponseWriter, r *http.Request) {
