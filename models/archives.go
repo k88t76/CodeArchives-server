@@ -571,6 +571,17 @@ func CreateTestArchives() {
 			Author:   "test-user",
 			Language: "html",
 		},
+		{Content: `package main
+
+		import "fmt"
+		
+		func main() {
+			fmt.Println("Hello, World!")
+		}`,
+			Title:    "Hello World",
+			Author:   "test-user",
+			Language: "go",
+		},
 	}
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE author = ?", tableNameArchives)
 	db.Exec(cmd, "test-user")
