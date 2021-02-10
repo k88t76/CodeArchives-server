@@ -40,7 +40,8 @@ func StartWebServer() {
 }
 
 func t(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(time.Now())
+	fmt.Fprint(w, "Hello, World!")
+	fmt.Fprint(w, time.Now())
 }
 
 func getAll(w http.ResponseWriter, r *http.Request) {
