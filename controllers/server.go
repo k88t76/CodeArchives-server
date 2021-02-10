@@ -11,20 +11,17 @@ import (
 	"github.com/k88t76/CodeArchives-server/models"
 )
 
-var cookie http.Cookie
-
 func StartWebServer() {
-	http.HandleFunc("/archive/", handleRequest)
-	http.HandleFunc("/archives", handleGetAll)
-	http.HandleFunc("/archive/c", handleCreate)
-	http.HandleFunc("/edit/", handleEdit)
-	http.HandleFunc("/delete/", handleDelete)
-	http.HandleFunc("/search/", handleSearch)
-	http.HandleFunc("/signin", handleSignIn)
-	http.HandleFunc("/signup", handleSignUp)
-	http.HandleFunc("/signout", handleSignOut)
-
-	http.HandleFunc("/testsignin", handleTestSignIn)
+	http.HandleFunc("/archive/", get)
+	http.HandleFunc("/archives", getAll)
+	http.HandleFunc("/create", create)
+	http.HandleFunc("/edit/", edit)
+	http.HandleFunc("/delete/", delete)
+	http.HandleFunc("/search/", search)
+	http.HandleFunc("/signin", signIn)
+	http.HandleFunc("/signup", signUp)
+	http.HandleFunc("/userbytoken", userByToken)
+	http.HandleFunc("/testsignin", testSignIn)
 
 	// [START setting_port]
 	port := os.Getenv("PORT")
@@ -40,298 +37,226 @@ func StartWebServer() {
 	// [END setting_port]
 }
 
-func handleRequest(w http.ResponseWriter, r *http.Request) {
-	var err error
-	switch r.Method {
-	case "GET":
-		err = Get(w, r)
-	case "POST":
-		//err = handlePost(w, r)
-	case "PUT":
-		//err = handlePut(w, r)
-	case "DELETE":
-		//err = handleDelete(w, r)
-	}
+func getAll(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	var token string
+	json.Unmarshal(body, &token)
+	name, _ := models.GetUserNameByToken(token)
+	archives, _ := models.GetArchivesByUser(name, 1000)
+	output, err := json.MarshalIndent(&archives, "", "\t\t")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
+	return
 }
 
-func handleGetAll(w http.ResponseWriter, r *http.Request) {
-
-	err := GetAll(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-}
-
-func handleCreate(w http.ResponseWriter, r *http.Request) {
-	err := Create(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func handleEdit(w http.ResponseWriter, r *http.Request) {
-	err := Edit(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func handleDelete(w http.ResponseWriter, r *http.Request) {
-	err := Delete(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func handleSearch(w http.ResponseWriter, r *http.Request) {
-	err := Search(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func handleSignIn(w http.ResponseWriter, r *http.Request) {
-	err := SignIn(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func handleSignUp(w http.ResponseWriter, r *http.Request) {
-	err := SignUp(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func handleSignOut(w http.ResponseWriter, r *http.Request) {
-	err := SignOut(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func handleTestSignIn(w http.ResponseWriter, r *http.Request) {
-	err := TestSignIn(w, r)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-func GetAll(w http.ResponseWriter, r *http.Request) error {
-	fmt.Printf("cookie: %v\n", cookie)
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	if cookie.Value != "" {
-		fmt.Println("cookie_detect!")
-		userName := models.GetUserNameBySessionID(cookie.Value)
-		archives, _ := models.GetArchivesByUser(userName, 100)
-		output, _ := json.MarshalIndent(&archives, "", "\t\t")
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(output)
-	} else {
-		output, _ := json.MarshalIndent("UnLogin", "", "\t\t")
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(output)
-	}
-
-	return nil
-}
-
-func Get(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+func get(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
-
 	archive := models.GetArchive(uuid)
 	output, err := json.MarshalIndent(&archive, "", "\t\t")
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
-	return nil
+	return
 }
 
-func Search(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	userName := models.GetUserNameBySessionID(cookie.Value)
+func search(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	var token string
+	json.Unmarshal(body, &token)
+	if token == "" {
+		return
+	}
+	name, err1 := models.GetUserNameByToken(token)
+	if err1 != nil {
+		http.Error(w, err1.Error(), http.StatusInternalServerError)
+	}
 	word := path.Base(r.URL.Path)
-	fmt.Printf("serch: %v\n", word)
-	archives, _ := models.GetMatchArchive(word, userName)
-	output, err := json.MarshalIndent(&archives, "", "\t\t")
-	if err != nil {
-		return err
+	fmt.Println(word)
+	var archives []models.Archive
+	if word == "" {
+		archives, _ = models.GetArchivesByUser(name, 1000)
+	} else {
+		archives, _ = models.GetMatchArchive(word, name)
+	}
+	output, err2 := json.MarshalIndent(&archives, "", "\t\t")
+	if err2 != nil {
+		http.Error(w, err2.Error(), http.StatusInternalServerError)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
-	return nil
+	return
 }
 
-func SignIn(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+func signIn(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
+	fmt.Printf("r.Method: %v\n", r.Method)
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
 	var user models.User
 	json.Unmarshal(body, &user)
-	fmt.Println("userName:")
-	fmt.Println(user.Name)
-	u, check := models.CheckUser(user)
+	uID, check := models.CheckUser(user)
 	if check {
 		fmt.Println("check OK")
-		err := u.CreateSession()
-		fmt.Printf("u : %v\n", u)
+		token, err := models.UpdateToken(uID)
 		if err != nil {
-			return err
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		session := models.GetSession(u.UUID)
-		fmt.Printf("session: %v\n", session)
-		cookie = http.Cookie{
-			Name:     "_cookie",
-			Value:    "test",
-			HttpOnly: true,
-		}
-		http.SetCookie(w, &cookie)
-		w.WriteHeader(200)
-		fmt.Printf("cookie Value: %v\n", cookie.Value)
+		output, _ := json.MarshalIndent(&token, "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
 	} else {
-		output, _ := json.MarshalIndent("Failed SignIn", "", "\t\t")
+		output, _ := json.MarshalIndent("Wrong Password", "", "\t\t")
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(output)
 	}
-	return nil
+	return
 }
 
-func SignUp(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+func signUp(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
-	fmt.Printf("Post body: %v\n", body)
-	fmt.Printf("r.Method: %v\n", r.Method)
-	fmt.Printf("r.Body: %v\n", r.Body)
 	var user models.User
 	json.Unmarshal(body, &user)
-	fmt.Println(user.Name)
-	fmt.Printf("user: %v\n", user)
-	err := user.Create()
-	u, check := models.CheckUser(user)
-	if check && err == nil {
-		fmt.Println("check OK")
-		err := u.CreateSession()
+	if user.Name == "" {
+		return
+	}
+	fmt.Println(user)
+	fmt.Println(user.Validate())
+	if user.Validate() {
+		fmt.Println("validation OK")
+		err := user.Create()
+		token, err := user.CreateSession()
+		fmt.Println(token)
 		if err != nil {
-			return err
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
-		session := models.GetSession(u.UUID)
-		fmt.Printf("session: %v\n", session)
-		cookie = http.Cookie{
-			Name:     "_cookie",
-			Value:    "test",
-			HttpOnly: true,
-		}
-		http.SetCookie(w, &cookie)
-		w.WriteHeader(200)
-		fmt.Printf("cookie Value: %v\n", cookie.Value)
+		output, _ := json.MarshalIndent(&token, "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
 	} else {
-		output, _ := json.MarshalIndent("UnLogin", "", "\t\t")
+		output, _ := json.MarshalIndent("UsedName", "", "\t\t")
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(output)
 	}
-	return nil
+	return
 }
 
-func SignOut(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	cookie = http.Cookie{
-		Name:     "_cookie",
-		Value:    "",
-		HttpOnly: true,
-	}
-	http.SetCookie(w, &cookie)
-	w.WriteHeader(200)
-	fmt.Printf("cookie Value: %v\n", cookie.Value)
-	return nil
-}
-
-func Create(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+func create(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
-	fmt.Printf("Post body: %v\n", body)
 	var archive models.Archive
 	json.Unmarshal(body, &archive)
-	userName := models.GetUserNameBySessionID(cookie.Value)
-	archive.Author = userName
 	err := archive.Create()
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.WriteHeader(200)
-	return nil
+	return
 }
 
-func Edit(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+func edit(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
 	uuid := path.Base(r.URL.Path)
 	fmt.Printf("[Edit] uuid: %v\n", uuid)
 	archive := models.GetArchive(uuid)
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
+	if body == nil {
+		return
+	}
 	fmt.Printf("body: %v\n", body)
 	json.Unmarshal(body, &archive)
 	fmt.Printf("archive: %v", archive)
 	err := archive.Update()
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.WriteHeader(200)
-	return nil
+	return
 }
 
-func Delete(w http.ResponseWriter, r *http.Request) error {
-	w.Header().Set("Access-Control-Allow-Headers", "*")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+func delete(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
 	uuid := path.Base(r.URL.Path)
-	fmt.Printf("uuid: %v\n", uuid)
+	if uuid == "" {
+		return
+	}
 	archive := models.GetArchive(uuid)
 	fmt.Println(archive)
 	err := archive.Delete()
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.WriteHeader(200)
-	return nil
+	return
 }
 
-func TestSignIn(w http.ResponseWriter, r *http.Request) error {
+func userByToken(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	var token string
+	json.Unmarshal(body, &token)
+	if token == "" {
+		return
+	}
+	name, err := models.GetUserNameByToken(token)
+	if err != nil {
+		return
+	}
+	fmt.Println(name)
+	output, _ := json.MarshalIndent(&name, "", "\t\t")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
+	return
+}
+
+func setHeader(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-	archives, _ := models.GetTestArchives()
-	output, _ := json.MarshalIndent(&archives, "", "\t\t")
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(output)
-	return nil
+}
+
+func testSignIn(w http.ResponseWriter, r *http.Request) {
+	setHeader(w)
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	var user models.User
+	json.Unmarshal(body, &user)
+	uID, check := models.CheckUser(user)
+	if check {
+		fmt.Println("check OK")
+		token, err := models.UpdateToken(uID)
+		models.CreateTestArchives()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		output, _ := json.MarshalIndent(&token, "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
+	} else {
+		output, _ := json.MarshalIndent("Wrong Password", "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
+	}
+	return
 }

@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/k88t76/CodeArchives-server/config"
 
@@ -34,46 +35,43 @@ func init() {
 	cmd := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", name)
 	_, err = db.Exec(cmd)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatalln(err)
 	}
 
-	/*
-		cmd = fmt.Sprintf("USE %s", name)
-		_, err = db.Exec(cmd)
-		if err != nil {
-			fmt.Println(err)
-		}
-	*/
+	cmd = fmt.Sprintf("USE %s", name)
+	_, err = db.Exec(cmd)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-	// create archivesTable
+	// create notebooksTable
 	cmd = fmt.Sprintf(`
-			CREATE TABLE IF NOT EXISTS %s (
-			id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-			uuid VARCHAR(36) NOT NULL,
-			content TEXT,
-			title VARCHAR(255),
-			author VARCHAR(255),
-			language VARCHAR(255),
-			created_at DATETIME)`, tableNameArchives)
+		CREATE TABLE IF NOT EXISTS %s (
+		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+		uuid VARCHAR(36) NOT NULL, 
+		content TEXT NOT NULL,
+		title VARCHAR(255) NOT NULL,
+		author VARCHAR(255),
+		language VARCHAR(255),
+		created_at DATETIME)`, tableNameArchives)
 	db.Exec(cmd)
 
 	// create usersTable
 	cmd = fmt.Sprintf(`
-			CREATE TABLE IF NOT EXISTS %s (
-			id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-			uuid VARCHAR(36) NOT NULL,
-			name VARCHAR(255),
-			password VARCHAR(255),
-			created_at DATETIME)`, tableNameUsers)
+		CREATE TABLE IF NOT EXISTS %s (
+		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+		uuid VARCHAR(36) NOT NULL, 
+		name VARCHAR(255),
+		password VARCHAR(255),
+		created_at DATETIME)`, tableNameUsers)
 	db.Exec(cmd)
 
-	// create sessionsTable
 	cmd = fmt.Sprintf(`
-			CREATE TABLE IF NOT EXISTS %s (
-			id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-			uuid VARCHAR(36) NOT NULL,
-			user_id VARCHAR(36),
-			user_name VARCHAR(255),
-			created_at DATETIME)`, tableNameSessions)
+		CREATE TABLE IF NOT EXISTS %s (
+		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+		uuid VARCHAR(36) NOT NULL, 
+		token VARCHAR(36),
+		user_id VARCHAR(36),
+		created_at DATETIME)`, tableNameSessions)
 	db.Exec(cmd)
 }
