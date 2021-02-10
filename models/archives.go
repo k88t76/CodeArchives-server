@@ -103,7 +103,7 @@ func (a *Archive) Create() error {
 		return nil
 	}
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
-	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().Format(time.RFC3339))
+	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05"))
 	if err != nil {
 		return err
 	}
@@ -112,7 +112,7 @@ func (a *Archive) Create() error {
 
 func (a *Archive) Update() error {
 	cmd := fmt.Sprintf("UPDATE %s SET content = ?, title = ?, language = ?, created_at = ? WHERE uuid = ?", tableNameArchives)
-	_, err := db.Exec(cmd, a.Content, a.Title, a.Language, time.Now().Format(time.RFC3339), a.UUID)
+	_, err := db.Exec(cmd, a.Content, a.Title, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05"), a.UUID)
 	if err != nil {
 		return err
 	}

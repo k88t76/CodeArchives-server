@@ -7,13 +7,11 @@ import (
 	"net/http"
 	"os"
 	"path"
-	"time"
 
 	"github.com/k88t76/CodeArchives-server/models"
 )
 
 func StartWebServer() {
-	http.HandleFunc("/", t)
 	http.HandleFunc("/archive/", get)
 	http.HandleFunc("/archives", getAll)
 	http.HandleFunc("/create", create)
@@ -37,11 +35,6 @@ func StartWebServer() {
 		log.Fatal(err)
 	}
 	// [END setting_port]
-}
-
-func t(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello, World!")
-	fmt.Fprint(w, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"))
 }
 
 func getAll(w http.ResponseWriter, r *http.Request) {

@@ -93,7 +93,7 @@ func GetUser(sessionUUID string) *User {
 func (u *User) Create() error {
 	u.UUID = CreateUUID()
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, name, password, created_at) VALUES (?, ?, ?, ?)", tableNameUsers)
-	_, err := db.Exec(cmd, u.UUID, u.Name, Encrypt(u.Password), time.Now().Format(time.RFC3339))
+	_, err := db.Exec(cmd, u.UUID, u.Name, Encrypt(u.Password), time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05"))
 	if err != nil {
 		return err
 	}
@@ -115,7 +115,7 @@ func (u *User) CreateTmpUser() error {
 func (u *User) CreateSession() (string, error) {
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, token, user_id, created_at) VALUES (?, ?, ?, ?)", tableNameSessions)
 	token := CreateUUID()
-	_, err := db.Exec(cmd, CreateUUID(), token, u.UUID, time.Now().Format(time.RFC3339))
+	_, err := db.Exec(cmd, CreateUUID(), token, u.UUID, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05"))
 	return token, err
 }
 
