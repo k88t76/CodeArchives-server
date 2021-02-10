@@ -199,7 +199,7 @@ func SignIn(w http.ResponseWriter, r *http.Request) error {
 		fmt.Printf("session: %v\n", session)
 		cookie = http.Cookie{
 			Name:     "_cookie",
-			Value:    session.UUID,
+			Value:    "test",
 			HttpOnly: true,
 		}
 		http.SetCookie(w, &cookie)
@@ -239,7 +239,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) error {
 		fmt.Printf("session: %v\n", session)
 		cookie = http.Cookie{
 			Name:     "_cookie",
-			Value:    session.UUID,
+			Value:    "test",
 			HttpOnly: true,
 		}
 		http.SetCookie(w, &cookie)

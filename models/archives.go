@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"time"
 )
 
 type Archive struct {
@@ -99,7 +100,7 @@ func GetMatchArchive(search string, userName string) ([]Archive, error) {
 
 func (a *Archive) Create() error {
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
-	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, "2021-01-01")
+	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now())
 	if err != nil {
 		return err
 	}
