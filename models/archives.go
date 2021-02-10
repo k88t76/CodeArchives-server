@@ -460,6 +460,6 @@ func CreateTestArchives() {
 	db.Exec(cmd, "test-user")
 	for _, a := range tests {
 		cmd = fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
-		db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now())
+		db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)))
 	}
 }
