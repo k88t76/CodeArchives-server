@@ -250,7 +250,7 @@ func testSignIn(w http.ResponseWriter, r *http.Request) {
 	if checkUser && checkPassword {
 		fmt.Println("check OK")
 		token, err := models.UpdateToken(uID)
-		models.CreateTestArchives()
+		models.CreateGuestArchives()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}

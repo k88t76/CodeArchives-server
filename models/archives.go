@@ -140,99 +140,84 @@ func CreateUUID() string {
 	return uuid
 }
 
-func CreateTestArchives() {
+func CreateGuestArchives() {
 	tests := []Archive{
-		{Content: `func parallel_channel_wg(number []int) {
-			var wg sync.WaitGroup
-			res := make(chan int, len(number))
-			go func() {
-				defer close(res)
-				for _, n := range number {
-					wg.Add(1)
-					go func(n int) {
-						fmt.Println("parallel_channel_wg push: ", n)
-						res <- n
-						wg.Done()
-					}(n)
-				}
-				wg.Wait()
-			}()
+		{Content: `package controllers
+
+		import (
+			"encoding/json"
+			"fmt"
+			"log"
+			"net/http"
+			"os"
+			"path"
 		
-			for r := range res {
-				fmt.Println("parallel_channel_wg pull: ", r)
+			"github.com/k88t76/CodeArchives-server/models"
+		)
+		
+		func StartWebServer() {
+			http.HandleFunc("/archive/", get)
+			http.HandleFunc("/archives", getAll)
+			http.HandleFunc("/create", create)
+			http.HandleFunc("/edit/", edit)
+			http.HandleFunc("/delete/", delete)
+			http.HandleFunc("/search/", search)
+			http.HandleFunc("/signin", signIn)
+			http.HandleFunc("/signup", signUp)
+			http.HandleFunc("/userbytoken", userByToken)
+			http.HandleFunc("/testsignin", testSignIn)
+		
+			// [START setting_port]
+			port := os.Getenv("PORT")
+			if port == "" {
+				port = "8080"
+				log.Printf("Defaulting to port %s", port)
 			}
+		
+			log.Printf("Listening on port %s", port)
+			if err := http.ListenAndServe(":"+port, nil); err != nil {
+				log.Fatal(err)
+			}
+			// [END setting_port]
 		}
-		`,
-			Title:    "goroutine",
-			Author:   "test-user",
+		
+		func getAll(w http.ResponseWriter, r *http.Request) {
+			setHeader(w)
+			len := r.ContentLength
+			body := make([]byte, len)
+			r.Body.Read(body)
+			var token string
+			json.Unmarshal(body, &token)
+			name, _ := models.GetUserNameByToken(token)
+			archives, _ := models.GetArchivesByUser(name, 1000)
+			output, err := json.MarshalIndent(&archives, "", "\t\t")
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+			}
+			w.Header().Set("Content-Type", "application/json")
+			w.Write(output)
+			return
+		}`,
+			Title:    "server.go",
+			Author:   "guest-user",
 			Language: "go",
 		},
-		{Content: `---
-		apiVersion: v1
-		kind: ConfigMap
-		metadata:
-		  name: init-db-sql
-		data:
-		  create_usertable.sql: |
-			CREATE TABLE IF NOT EXISTS mydb.users (id INT AUTO_INCREMENT NOT NULL PRIMARY KEY, name VARCHAR(50));
-		---
-		apiVersion: v1
-		kind: Pod
-		metadata:
-		  name: sample-pod
-		  labels:
-			role: all-in-one
-		spec:
-		  containers:
-		  - name: app-container
-			image: masayaaoyama/flexy-demo-app:v1.0
-			imagePullPolicy: Always
-			env:
-			- name: DBHOST
-			  value: 127.0.0.1
-			- name: DBPORT
-			  value: "3306"
-			- name: DBUSER
-			  value: myuser
-			- name: DBPASS
-			  value: mypass
-			- name: DBNAME
-			  value: mydb
-		  - name: mysql-container
-			image: mysql:8.0
-			env:
-			- name: MYSQL_ROOT_PASSWORD
-			  value: rootpass
-			- name: MYSQL_DATABASE
-			  value: mydb
-			- name: MYSQL_USER
-			  value: myuser
-			- name: MYSQL_PASSWORD
-			  value: mypass
-			volumeMounts:
-			- name: init-sql-configmap
-			  mountPath: /docker-entrypoint-initdb.d
-		  volumes:
-			- name: init-sql-configmap
-			  configMap:
-				name: init-db-sql
-		---
-		apiVersion: v1
-		kind: Service
-		metadata:
-		  name: flexy-demo-all-in-one
-		spec:
-		  type: LoadBalancer
-		  ports:
-			- name: "http-port"
-			  protocol: "TCP"
-			  port: 8080
-			  targetPort: 8080
-		  selector:
-			role: all-in-one`,
-			Title:    "pod.yaml",
-			Author:   "test-user",
-			Language: "yaml",
+		{Content: `async fn maybe_fail_hello(setting: bool) -> Result<String, dyn std::error::Error> {
+			if setting {
+				Ok("hello".to_string())
+			} else {
+				Err("fail")
+			}
+		}
+		
+		#[tokio::main]
+		async fn print_async_hello(setting: bool) {
+			let greeting: String = maybe_fail_hello(setting).await?;
+			println!("{}", greeting);
+		}`,
+			Title:    "async.rs",
+			Author:   "guest-user",
+			Language: "rust",
 		},
 		{Content: `SELECT 
 		CONVERT(int, SUBSTRING(MIN(jis_code), 1, 2)) AS id
@@ -258,7 +243,7 @@ func CreateTestArchives() {
 	ORDER BY id ASC 
 		`,
 			Title:    "SQL",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "sql",
 		},
 		{Content: `export async function getServerSideProps({res, req}) {
@@ -349,7 +334,7 @@ func CreateTestArchives() {
 		  } 
 		  }`,
 			Title:    "index.js",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "jsx",
 		},
 		{Content: `FROM golang:1.12.0-alpine3.9
@@ -371,7 +356,7 @@ func CreateTestArchives() {
 		CMD ["/go/src/app"]
 		`,
 			Title:    "Dockerfile",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "docker",
 		},
 		{Content: `package main
@@ -498,7 +483,7 @@ func CreateTestArchives() {
 			fmt.Println(t[n])
 		}`,
 			Title:    "algorithm",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "go",
 		},
 		{Content: `import numpy as np
@@ -514,7 +499,7 @@ func CreateTestArchives() {
 		print(vec(arr))
 		print(arr[vec(arr)])`,
 			Title:    "prime.py",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "python",
 		},
 		{Content: `for i in 1..100
@@ -529,7 +514,7 @@ func CreateTestArchives() {
 		end
 		end`,
 			Title:    "fizzbuzz.rb",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "ruby",
 		},
 		{Content: `<!DOCTYPE html>
@@ -568,7 +553,7 @@ func CreateTestArchives() {
 		 </body>
 		</html>`,
 			Title:    "template.html",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "html",
 		},
 		{Content: `package main
@@ -579,12 +564,12 @@ func CreateTestArchives() {
 			fmt.Println("Hello, World!")
 		}`,
 			Title:    "Hello World",
-			Author:   "test-user",
+			Author:   "guest-user",
 			Language: "go",
 		},
 	}
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE author = ?", tableNameArchives)
-	db.Exec(cmd, "test-user")
+	db.Exec(cmd, "guest-user")
 	for _, a := range tests {
 		cmd = fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
 		db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"))
