@@ -127,17 +127,21 @@ func (u *User) Update() error {
 	return err
 }
 
-func CheckUser(user User) (string, bool) {
-	cmd := fmt.Sprintf("SELECT uuid FROM %s WHERE name = ? AND password = ?", tableNameUsers)
-	fmt.Println(user.Name)
-	fmt.Println(user.Password)
-	row := db.QueryRow(cmd, user.Name, Encrypt(user.Password))
+func CheckUser(user User) (string, bool, bool) {
+	cmd := fmt.Sprintf("SELECT uuid FROM %s WHERE name = ?", tableNameUsers)
+	row := db.QueryRow(cmd, user.Name)
 	var u User
 	err := row.Scan(&u.UUID)
 	if err == sql.ErrNoRows {
-		return "", false
+		return "", false, false
 	}
-	return u.UUID, true
+	cmd = fmt.Sprintf("SELECT uuid FROM %s WHERE name = ? AND password = ?", tableNameUsers)
+	row = db.QueryRow(cmd, user.Name, Encrypt(user.Password))
+	err = row.Scan(&u.UUID)
+	if err == sql.ErrNoRows {
+		return "", true, false
+	}
+	return u.UUID, true, true
 }
 
 func UpdateToken(userID string) (string, error) {

@@ -106,14 +106,18 @@ func signIn(w http.ResponseWriter, r *http.Request) {
 	r.Body.Read(body)
 	var user models.User
 	json.Unmarshal(body, &user)
-	uID, check := models.CheckUser(user)
-	if check {
+	uID, checkUser, checkPassword := models.CheckUser(user)
+	if checkUser && checkPassword {
 		fmt.Println("check OK")
 		token, err := models.UpdateToken(uID)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 		output, _ := json.MarshalIndent(&token, "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
+	} else if !checkUser {
+		output, _ := json.MarshalIndent("Unknown User", "", "\t\t")
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(output)
 	} else {
@@ -242,8 +246,8 @@ func testSignIn(w http.ResponseWriter, r *http.Request) {
 	r.Body.Read(body)
 	var user models.User
 	json.Unmarshal(body, &user)
-	uID, check := models.CheckUser(user)
-	if check {
+	uID, checkUser, checkPassword := models.CheckUser(user)
+	if checkUser && checkPassword {
 		fmt.Println("check OK")
 		token, err := models.UpdateToken(uID)
 		models.CreateTestArchives()
@@ -251,6 +255,10 @@ func testSignIn(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 		output, _ := json.MarshalIndent(&token, "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(output)
+	} else if !checkUser {
+		output, _ := json.MarshalIndent("Unknown User", "", "\t\t")
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(output)
 	} else {
