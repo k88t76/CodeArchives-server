@@ -141,7 +141,7 @@ func CreateUUID() string {
 }
 
 func CreateGuestArchives() {
-	tests := []Archive{
+	guestArchives := []Archive{
 		{Content: `package controllers
 
 		import (
@@ -570,7 +570,7 @@ func CreateGuestArchives() {
 	}
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE author = ?", tableNameArchives)
 	db.Exec(cmd, "guest-user")
-	for _, a := range tests {
+	for _, a := range guestArchives {
 		cmd = fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
 		db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"))
 	}

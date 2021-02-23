@@ -21,7 +21,7 @@ func StartWebServer() {
 	http.HandleFunc("/signin", signIn)
 	http.HandleFunc("/signup", signUp)
 	http.HandleFunc("/userbytoken", userByToken)
-	http.HandleFunc("/testsignin", testSignIn)
+	http.HandleFunc("/guestsignin", guestSignIn)
 
 	// [START setting_port]
 	port := os.Getenv("PORT")
@@ -239,7 +239,7 @@ func setHeader(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 }
 
-func testSignIn(w http.ResponseWriter, r *http.Request) {
+func guestSignIn(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	len := r.ContentLength
 	body := make([]byte, len)
