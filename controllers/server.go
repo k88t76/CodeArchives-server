@@ -177,6 +177,9 @@ func create(w http.ResponseWriter, r *http.Request) {
 func edit(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	uuid := path.Base(r.URL.Path)
+	if uuid == "" {
+		return
+	}
 	archiveOrigin := models.GetArchive(uuid)
 	var archive models.Archive
 	len := r.ContentLength
