@@ -177,17 +177,16 @@ func create(w http.ResponseWriter, r *http.Request) {
 func edit(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	uuid := path.Base(r.URL.Path)
-	fmt.Printf("[Edit] uuid: %v\n", uuid)
-	archive := models.GetArchive(uuid)
+	archiveOrigin := models.GetArchive(uuid)
+	var archive models.Archive
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
 	if body == nil {
 		return
 	}
-	fmt.Printf("body: %v\n", body)
 	json.Unmarshal(body, &archive)
-	fmt.Printf("archive: %v", archive)
+	archive.ID = archiveOrigin.ID
 	err := archive.Update()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
