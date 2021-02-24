@@ -177,7 +177,7 @@ func create(w http.ResponseWriter, r *http.Request) {
 func edit(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	uuid := path.Base(r.URL.Path)
-	fmt.Printf("[Edit] uuid: %v\n", uuid)
+	fmt.Printf("Edit uuid: %v\n", uuid)
 	archive := models.GetArchive(uuid)
 	len := r.ContentLength
 	body := make([]byte, len)
