@@ -179,10 +179,10 @@ func edit(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
 	fmt.Printf("Edit uuid: %v\n", uuid)
 	archive := models.GetArchive(uuid)
-	len := r.ContentLength
-	body := make([]byte, len)
+	length := r.ContentLength
+	body := make([]byte, length)
 	r.Body.Read(body)
-	if body == nil {
+	if len(body) == 0 {
 		return
 	}
 	fmt.Printf("body: %v\n", body)

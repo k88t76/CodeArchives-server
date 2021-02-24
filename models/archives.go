@@ -111,8 +111,8 @@ func (a *Archive) Create() error {
 }
 
 func (a *Archive) Update() error {
-	cmd := fmt.Sprintf("UPDATE %s SET content = ?, title = ?, language = ?, created_at = ? WHERE uuid = ?", tableNameArchives)
-	_, err := db.Exec(cmd, a.Content, a.Title, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"), a.UUID)
+	cmd := fmt.Sprintf("UPDATE %s SET uuid = ?, content = ?, title = ?, language = ?, created_at = ? WHERE uuid = ?", tableNameArchives)
+	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"), a.UUID)
 	if err != nil {
 		return err
 	}
