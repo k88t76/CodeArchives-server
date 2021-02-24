@@ -179,6 +179,7 @@ func edit(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
 	fmt.Printf("[Edit] uuid: %v\n", uuid)
 	archive := models.GetArchive(uuid)
+	id := archive.ID
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -187,6 +188,7 @@ func edit(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("body: %v\n", body)
 	json.Unmarshal(body, &archive)
+	archive.ID = id
 	fmt.Printf("archive: %v", archive)
 	err := archive.Update()
 	if err != nil {
