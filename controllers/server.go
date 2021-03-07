@@ -41,16 +41,16 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	var err error
 	fmt.Println("r.Method: ", r.Method)
 	switch r.Method {
-	case "GET":
+	case http.MethodGet:
 		fmt.Println("GET")
 		err = getAll(w, r)
-	case "POST":
+	case http.MethodPost:
 		fmt.Println("POST")
 		err = post(w, r)
-	case "PUT":
+	case http.MethodPut:
 		fmt.Println("PUT")
 		err = put(w, r)
-	case "DELETE":
+	case http.MethodDelete:
 		fmt.Println("DELETE")
 		err = delete(w, r)
 	default:
