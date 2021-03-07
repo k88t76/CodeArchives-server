@@ -12,8 +12,8 @@ import (
 )
 
 func StartWebServer() {
-	http.HandleFunc("/archive", handleRequest)
-	http.HandleFunc("/archives", getAll)
+	http.HandleFunc("/archive/", get)
+	http.HandleFunc("/archives", handleRequest)
 	//http.HandleFunc("/create", create)
 	//http.HandleFunc("/edit/", edit)
 	//http.HandleFunc("/delete/", delete)
@@ -43,7 +43,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
 		fmt.Println("GET")
-		err = get(w, r)
+		err = getAll(w, r)
 	case "POST":
 		fmt.Println("POST")
 		err = post(w, r)
@@ -61,7 +61,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func getAll(w http.ResponseWriter, r *http.Request) {
+func getAll(w http.ResponseWriter, r *http.Request) error {
 	setHeader(w)
 	len := r.ContentLength
 	body := make([]byte, len)
@@ -72,23 +72,23 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 	archives, _ := models.GetArchivesByUser(name, 1000)
 	output, err := json.MarshalIndent(&archives, "", "\t\t")
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(output)
-	return
-}
-
-func get(w http.ResponseWriter, r *http.Request) error {
-	uuid := path.Base(r.URL.Path)
-	archive := models.GetArchive(uuid)
-	output, err := json.MarshalIndent(&archive, "", "\t\t")
-	if err != nil {
 		return err
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
 	return nil
+}
+
+func get(w http.ResponseWriter, r *http.Request) {
+	uuid := path.Base(r.URL.Path)
+	archive := models.GetArchive(uuid)
+	output, err := json.MarshalIndent(&archive, "", "\t\t")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
+	return
 }
 
 func search(w http.ResponseWriter, r *http.Request) {
