@@ -39,14 +39,19 @@ func StartWebServer() {
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	var err error
+	fmt.Println("r.Method: ", r.Method)
 	switch r.Method {
 	case "GET":
+		fmt.Println("GET")
 		err = get(w, r)
 	case "POST":
+		fmt.Println("POST")
 		err = post(w, r)
 	case "PUT":
+		fmt.Println("PUT")
 		err = put(w, r)
 	case "DELETE":
+		fmt.Println("DELETE")
 		err = delete(w, r)
 	default:
 		return
