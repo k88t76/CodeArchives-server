@@ -12,11 +12,11 @@ import (
 )
 
 func StartWebServer() {
-	http.HandleFunc("/archive", handleRequest)
+	http.HandleFunc("/archive/", get)
 	http.HandleFunc("/archives", getAll)
-	//http.HandleFunc("/create", create)
-	//http.HandleFunc("/edit/", edit)
-	//http.HandleFunc("/delete/", delete)
+	http.HandleFunc("/create", create)
+	http.HandleFunc("/edit/", edit)
+	http.HandleFunc("/delete/", delete)
 	http.HandleFunc("/search/", search)
 	http.HandleFunc("/signin", signIn)
 	http.HandleFunc("/signup", signUp)
@@ -37,30 +37,6 @@ func StartWebServer() {
 	// [END setting_port]
 }
 
-func handleRequest(w http.ResponseWriter, r *http.Request) {
-	var err error
-	fmt.Println("r.Method: ", r.Method)
-	switch r.Method {
-	case http.MethodGet:
-		fmt.Println("GET")
-		err = get(w, r)
-	case http.MethodPost:
-		fmt.Println("POST")
-		err = post(w, r)
-	case http.MethodPut:
-		fmt.Println("PUT")
-		err = put(w, r)
-	case http.MethodDelete:
-		fmt.Println("DELETE")
-		err = delete(w, r)
-	default:
-		return
-	}
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
 func getAll(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	len := r.ContentLength
@@ -79,16 +55,16 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func get(w http.ResponseWriter, r *http.Request) error {
+func get(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
 	archive := models.GetArchive(uuid)
 	output, err := json.MarshalIndent(&archive, "", "\t\t")
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
-	return nil
+	return
 }
 
 func search(w http.ResponseWriter, r *http.Request) {
@@ -183,7 +159,7 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func post(w http.ResponseWriter, r *http.Request) error {
+func create(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	len := r.ContentLength
 	body := make([]byte, len)
@@ -192,13 +168,13 @@ func post(w http.ResponseWriter, r *http.Request) error {
 	json.Unmarshal(body, &archive)
 	err := archive.Create()
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.WriteHeader(200)
-	return nil
+	return
 }
 
-func put(w http.ResponseWriter, r *http.Request) error {
+func edit(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	uuid := path.Base(r.URL.Path)
 	fmt.Printf("Edit uuid: %v\n", uuid)
@@ -207,33 +183,33 @@ func put(w http.ResponseWriter, r *http.Request) error {
 	body := make([]byte, length)
 	r.Body.Read(body)
 	if len(body) == 0 {
-		return nil
+		return
 	}
 	fmt.Printf("body: %v\n", body)
 	json.Unmarshal(body, &archive)
 	fmt.Printf("archive: %v", archive)
 	err := archive.Update()
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.WriteHeader(200)
-	return nil
+	return
 }
 
-func delete(w http.ResponseWriter, r *http.Request) error {
+func delete(w http.ResponseWriter, r *http.Request) {
 	setHeader(w)
 	uuid := path.Base(r.URL.Path)
 	if uuid == "" {
-		return nil
+		return
 	}
 	archive := models.GetArchive(uuid)
 	fmt.Println(archive)
 	err := archive.Delete()
 	if err != nil {
-		return err
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.WriteHeader(200)
-	return nil
+	return
 }
 
 func userByToken(w http.ResponseWriter, r *http.Request) {
