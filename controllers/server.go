@@ -305,7 +305,7 @@ func setCookie(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 		Secure:   true,
 		SameSite: http.SameSiteNoneMode,
-		Domain:   "example.app",
+		Domain:   "vercel.app",
 	}
 	http.SetCookie(w, cookie)
 	/* クッキー削除
