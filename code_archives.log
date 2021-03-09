@@ -8,3 +8,92 @@
 2021/01/19 01:48:58 server.go:39: Listening on port 8080
 2021/01/19 01:56:11 server.go:36: Defaulting to port 8080
 2021/01/19 01:56:11 server.go:39: Listening on port 8080
+2021/03/09 18:50:17 server.go:30: Defaulting to port 8080
+2021/03/09 18:50:17 server.go:33: Listening on port 8080
+2021/03/09 18:59:23 server.go:32: Defaulting to port 8080
+2021/03/09 18:59:23 server.go:35: Listening on port 8080
+2021/03/09 19:16:12 server.go:32: Defaulting to port 8080
+2021/03/09 19:16:12 server.go:35: Listening on port 8080
+2021/03/09 19:20:05 server.go:32: Defaulting to port 8080
+2021/03/09 19:20:05 server.go:35: Listening on port 8080
+2021/03/09 19:22:55 server.go:32: Defaulting to port 8080
+2021/03/09 19:22:55 server.go:35: Listening on port 8080
+2021/03/09 19:25:30 server.go:32: Defaulting to port 8080
+2021/03/09 19:25:30 server.go:35: Listening on port 8080
+2021/03/09 19:25:38 server.go:295: http: named cookie not present
+2021/03/09 19:27:38 server.go:32: Defaulting to port 8080
+2021/03/09 19:27:38 server.go:35: Listening on port 8080
+2021/03/09 19:32:46 server.go:32: Defaulting to port 8080
+2021/03/09 19:32:46 server.go:35: Listening on port 8080
+2021/03/09 19:42:22 server.go:33: Defaulting to port 8080
+2021/03/09 19:42:22 server.go:36: Listening on port 8080
+2021/03/09 19:47:30 server.go:33: Defaulting to port 8080
+2021/03/09 19:47:30 server.go:36: Listening on port 8080
+2021/03/09 19:48:51 server.go:3139: http: panic serving [::1]:60931: runtime error: invalid memory address or nil pointer dereference
+goroutine 5 [running]:
+net/http.(*conn).serve.func1(0xc000070000)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/controllers.setCookie(0x138c0d0, 0xc0000c42a0, 0xc0000d4300)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:307 +0x570
+net/http.HandlerFunc.ServeHTTP(0x1342498, 0x138c0d0, 0xc0000c42a0, 0xc0000d4300)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0000c42a0, 0xc0000d4300)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0000c4000, 0x138c0d0, 0xc0000c42a0, 0xc0000d4300)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000070000, 0x138c960, 0xc000068040)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/09 19:48:51 server.go:3139: http: panic serving [::1]:61059: runtime error: invalid memory address or nil pointer dereference
+goroutine 12 [running]:
+net/http.(*conn).serve.func1(0xc000070140)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/controllers.setCookie(0x138c0d0, 0xc000078700, 0xc000074500)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:307 +0x570
+net/http.HandlerFunc.ServeHTTP(0x1342498, 0x138c0d0, 0xc000078700, 0xc000074500)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc000078700, 0xc000074500)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0000c4000, 0x138c0d0, 0xc000078700, 0xc000074500)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000070140, 0x138c960, 0xc000068680)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/09 19:49:25 server.go:33: Defaulting to port 8080
+2021/03/09 19:49:25 server.go:36: Listening on port 8080
+2021/03/09 19:50:06 server.go:33: Defaulting to port 8080
+2021/03/09 19:50:06 server.go:36: Listening on port 8080
+2021/03/09 19:50:28 server.go:320: http: named cookie not present
+2021/03/09 19:51:18 server.go:33: Defaulting to port 8080
+2021/03/09 19:51:18 server.go:36: Listening on port 8080
+2021/03/09 19:51:58 server.go:320: http: named cookie not present
+2021/03/09 19:52:06 server.go:33: Defaulting to port 8080
+2021/03/09 19:52:06 server.go:36: Listening on port 8080
+2021/03/09 19:53:15 server.go:320: http: named cookie not present
+2021/03/09 19:54:09 server.go:33: Defaulting to port 8080
+2021/03/09 19:54:09 server.go:36: Listening on port 8080
+2021/03/09 19:54:59 server.go:320: http: named cookie not present
+2021/03/09 19:55:03 server.go:33: Defaulting to port 8080
+2021/03/09 19:55:03 server.go:36: Listening on port 8080
+2021/03/09 19:59:03 server.go:320: http: named cookie not present
+2021/03/09 19:59:17 server.go:33: Defaulting to port 8080
+2021/03/09 19:59:17 server.go:36: Listening on port 8080
+2021/03/09 19:59:55 server.go:320: http: named cookie not present
+2021/03/09 20:00:02 server.go:33: Defaulting to port 8080
+2021/03/09 20:00:02 server.go:36: Listening on port 8080
+2021/03/09 20:01:56 server.go:320: http: named cookie not present
+2021/03/09 20:02:04 server.go:33: Defaulting to port 8080
+2021/03/09 20:02:04 server.go:36: Listening on port 8080
+2021/03/09 20:06:34 server.go:320: http: named cookie not present
+2021/03/09 20:06:47 server.go:33: Defaulting to port 8080
+2021/03/09 20:06:47 server.go:36: Listening on port 8080
+2021/03/09 20:07:04 server.go:33: Defaulting to port 8080
+2021/03/09 20:07:04 server.go:36: Listening on port 8080
+2021/03/09 20:07:58 server.go:33: Defaulting to port 8080
+2021/03/09 20:07:58 server.go:36: Listening on port 8080

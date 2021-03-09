@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"time"
 
 	"github.com/k88t76/CodeArchives-server/models"
 )
@@ -22,6 +23,8 @@ func StartWebServer() {
 	http.HandleFunc("/signup", signUp)
 	http.HandleFunc("/userbytoken", userByToken)
 	http.HandleFunc("/guestsignin", guestSignIn)
+	http.HandleFunc("/setcookie", setCookie)
+	http.HandleFunc("/getcookie", getCookie)
 
 	// [START setting_port]
 	port := os.Getenv("PORT")
@@ -99,7 +102,10 @@ func search(w http.ResponseWriter, r *http.Request) {
 }
 
 func signIn(w http.ResponseWriter, r *http.Request) {
-	setHeader(w)
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	fmt.Printf("r.Method: %v\n", r.Method)
 	len := r.ContentLength
 	body := make([]byte, len)
@@ -129,7 +135,11 @@ func signIn(w http.ResponseWriter, r *http.Request) {
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {
-	setHeader(w)
+	//setHeader(w)
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -240,7 +250,10 @@ func setHeader(w http.ResponseWriter) {
 }
 
 func guestSignIn(w http.ResponseWriter, r *http.Request) {
-	setHeader(w)
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -267,4 +280,48 @@ func guestSignIn(w http.ResponseWriter, r *http.Request) {
 		w.Write(output)
 	}
 	return
+}
+
+func setCookie(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	length := r.ContentLength
+	body := make([]byte, length)
+	if len(body) == 0 {
+		return
+	}
+	r.Body.Read(body)
+	var s string
+	json.Unmarshal(body, &s)
+	cookie := &http.Cookie{
+		Name:     "cookie",
+		Value:    s,
+		Expires:  time.Now().Add(time.Hour),
+		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode,
+	}
+	http.SetCookie(w, cookie)
+	/* クッキー削除
+	c, _ := r.Cookie("cookie")
+	c.MaxAge = -1
+	http.SetCookie(w, c)
+	*/
+}
+
+func getCookie(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	c, err := r.Cookie("cookie")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("cookie.Value: ", c.Value)
+	output, _ := json.MarshalIndent(&c.Value, "", "\t\t")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
 }
