@@ -305,7 +305,6 @@ func setCookie(w http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 		Secure:   true,
 		SameSite: http.SameSiteNoneMode,
-		Domain:   "appspot.com",
 	}
 	http.SetCookie(w, cookie)
 	/* クッキー削除
