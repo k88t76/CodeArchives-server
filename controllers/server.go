@@ -12,9 +12,9 @@ import (
 	"github.com/k88t76/CodeArchives-server/models"
 )
 
-const url string = "http://localhost:3000"
+//const url string = "http://localhost:3000"
 
-//const url string = "https://code-archives-client.vercel.app"
+const url string = "https://code-archives-client.vercel.app"
 
 func StartWebServer() {
 	http.HandleFunc("/archive/", get)
