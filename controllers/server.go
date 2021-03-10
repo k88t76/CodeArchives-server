@@ -302,7 +302,7 @@ func setCookie(w http.ResponseWriter, r *http.Request) {
 	cookie := &http.Cookie{
 		Name:     "cookie",
 		Value:    s,
-		Expires:  time.Now().Add(1000 * time.Hour),
+		Expires:  time.Now().Add(24 * time.Hour),
 		HttpOnly: true,
 		Secure:   true,
 		SameSite: http.SameSiteNoneMode,
