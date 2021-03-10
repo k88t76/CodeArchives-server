@@ -884,3 +884,445 @@ net/http.(*conn).serve(0xc00018a140, 0x138c960, 0xc0000d4380)
 	/usr/local/go/src/net/http/server.go:1952 +0x8cd
 created by net/http.(*Server).Serve
 	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 10:52:59 server.go:37: Defaulting to port 8080
+2021/03/10 10:52:59 server.go:40: Listening on port 8080
+2021/03/10 11:26:00 server.go:3139: http: panic serving [::1]:49470: runtime error: invalid memory address or nil pointer dereference
+goroutine 121 [running]:
+net/http.(*conn).serve.func1(0xc00009e960)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0001b7ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a30a0, 0xc0000bfe00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a30a0, 0xc0000bfe00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a30a0, 0xc0000bfe00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a30a0, 0xc0000bfe00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00009e960, 0x138c960, 0xc0000abe00)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 11:26:00 server.go:3139: http: panic serving [::1]:49485: runtime error: invalid memory address or nil pointer dereference
+goroutine 123 [running]:
+net/http.(*conn).serve.func1(0xc00009ea00)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000125ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0000b1880, 0xc0000bff00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0000b1880, 0xc0000bff00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0000b1880, 0xc0000bff00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0000b1880, 0xc0000bff00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00009ea00, 0x138c960, 0xc0000abec0)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:49 server.go:3139: http: panic serving [::1]:50762: runtime error: invalid memory address or nil pointer dereference
+goroutine 8 [running]:
+net/http.(*conn).serve.func1(0xc000148000)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc00041fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a21c0, 0xc00023c000)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a21c0, 0xc00023c000)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a21c0, 0xc00023c000)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a21c0, 0xc00023c000)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000148000, 0x138c960, 0xc000456000)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:49 server.go:3139: http: panic serving [::1]:50763: runtime error: invalid memory address or nil pointer dereference
+goroutine 172 [running]:
+net/http.(*conn).serve.func1(0xc0000760a0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc00041fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0005160e0, 0xc0003fe000)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0005160e0, 0xc0003fe000)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0005160e0, 0xc0003fe000)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0005160e0, 0xc0003fe000)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000760a0, 0x138c960, 0xc0003d4040)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:52 server.go:3139: http: panic serving [::1]:50770: runtime error: invalid memory address or nil pointer dereference
+goroutine 185 [running]:
+net/http.(*conn).serve.func1(0xc00048c0a0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000423ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a2460, 0xc00023c300)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a2460, 0xc00023c300)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a2460, 0xc00023c300)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a2460, 0xc00023c300)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00048c0a0, 0x138c960, 0xc000068440)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:52 server.go:3139: http: panic serving [::1]:50771: runtime error: invalid memory address or nil pointer dereference
+goroutine 148 [running]:
+net/http.(*conn).serve.func1(0xc000120000)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000537ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001b0000, 0xc000122000)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001b0000, 0xc000122000)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001b0000, 0xc000122000)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001b0000, 0xc000122000)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000120000, 0x138c960, 0xc000200000)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:55 server.go:3139: http: panic serving [::1]:50778: runtime error: invalid memory address or nil pointer dereference
+goroutine 192 [running]:
+net/http.(*conn).serve.func1(0xc00048c320)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc00041fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001b00e0, 0xc0003fe100)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001b00e0, 0xc0003fe100)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001b00e0, 0xc0003fe100)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001b00e0, 0xc0003fe100)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00048c320, 0x138c960, 0xc0000688c0)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:55 server.go:3139: http: panic serving [::1]:50779: runtime error: invalid memory address or nil pointer dereference
+goroutine 175 [running]:
+net/http.(*conn).serve.func1(0xc000076140)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc00041fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001b01c0, 0xc000122100)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001b01c0, 0xc000122100)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001b01c0, 0xc000122100)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001b01c0, 0xc000122100)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000076140, 0x138c960, 0xc000200280)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:57 server.go:3139: http: panic serving [::1]:50786: runtime error: invalid memory address or nil pointer dereference
+goroutine 196 [running]:
+net/http.(*conn).serve.func1(0xc0000763c0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0000b5ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc000516540, 0xc0003fe500)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc000516540, 0xc0003fe500)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc000516540, 0xc0003fe500)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc000516540, 0xc0003fe500)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000763c0, 0x138c960, 0xc0003d4580)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:29:57 server.go:3139: http: panic serving [::1]:50787: runtime error: invalid memory address or nil pointer dereference
+goroutine 193 [running]:
+net/http.(*conn).serve.func1(0xc00048c3c0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000423ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a2700, 0xc00023c800)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a2700, 0xc00023c800)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a2700, 0xc00023c800)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a2700, 0xc00023c800)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00048c3c0, 0x138c960, 0xc000068940)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:00 server.go:3139: http: panic serving [::1]:50794: runtime error: invalid memory address or nil pointer dereference
+goroutine 203 [running]:
+net/http.(*conn).serve.func1(0xc0000765a0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0000b5ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0005168c0, 0xc0003fe900)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0005168c0, 0xc0003fe900)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0005168c0, 0xc0003fe900)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0005168c0, 0xc0003fe900)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000765a0, 0x138c960, 0xc0003d4a40)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:00 server.go:3139: http: panic serving [::1]:50795: runtime error: invalid memory address or nil pointer dereference
+goroutine 211 [running]:
+net/http.(*conn).serve.func1(0xc00048c460)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000423ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a27e0, 0xc00023c900)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a27e0, 0xc00023c900)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a27e0, 0xc00023c900)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a27e0, 0xc00023c900)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00048c460, 0x138c960, 0xc000068a40)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:02 server.go:3139: http: panic serving [::1]:50802: runtime error: invalid memory address or nil pointer dereference
+goroutine 154 [running]:
+net/http.(*conn).serve.func1(0xc000120140)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0000b5ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001b0460, 0xc000122400)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001b0460, 0xc000122400)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001b0460, 0xc000122400)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001b0460, 0xc000122400)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000120140, 0x138c960, 0xc000200580)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:02 server.go:3139: http: panic serving [::1]:50803: runtime error: invalid memory address or nil pointer dereference
+goroutine 213 [running]:
+net/http.(*conn).serve.func1(0xc00048c500)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000423ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a28c0, 0xc00023ca00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a28c0, 0xc00023ca00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a28c0, 0xc00023ca00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a28c0, 0xc00023ca00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00048c500, 0x138c960, 0xc000068b80)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:04 server.go:3139: http: panic serving [::1]:50810: runtime error: invalid memory address or nil pointer dereference
+goroutine 217 [running]:
+net/http.(*conn).serve.func1(0xc00048c640)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0003a7ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a2b60, 0xc00023cd00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a2b60, 0xc00023cd00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a2b60, 0xc00023cd00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a2b60, 0xc00023cd00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00048c640, 0x138c960, 0xc000068dc0)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:04 server.go:3139: http: panic serving [::1]:50811: runtime error: invalid memory address or nil pointer dereference
+goroutine 220 [running]:
+net/http.(*conn).serve.func1(0xc00048c6e0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0003a7ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a2c40, 0xc00023ce00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a2c40, 0xc00023ce00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a2c40, 0xc00023ce00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a2c40, 0xc00023ce00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00048c6e0, 0x138c960, 0xc000068f40)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:07 server.go:3139: http: panic serving [::1]:50818: runtime error: invalid memory address or nil pointer dereference
+goroutine 226 [running]:
+net/http.(*conn).serve.func1(0xc000076780)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000535ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a2d20, 0xc0003fed00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a2d20, 0xc0003fed00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a2d20, 0xc0003fed00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a2d20, 0xc0003fed00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000076780, 0x138c960, 0xc0003d4e80)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 12:30:07 server.go:3139: http: panic serving [::1]:50819: runtime error: invalid memory address or nil pointer dereference
+goroutine 161 [running]:
+net/http.(*conn).serve.func1(0xc0001203c0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000535ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001b0700, 0xc000122700)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001b0700, 0xc000122700)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001b0700, 0xc000122700)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001b0700, 0xc000122700)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0001203c0, 0x138c960, 0xc000200b80)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 13:20:42 server.go:3139: http: panic serving [::1]:51872: runtime error: invalid memory address or nil pointer dereference
+goroutine 320 [running]:
+net/http.(*conn).serve.func1(0xc000148140)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000423ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc000074000, 0xc000378000)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc000074000, 0xc000378000)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc000074000, 0xc000378000)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc000074000, 0xc000378000)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000148140, 0x138c960, 0xc0000be240)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 13:20:42 server.go:3139: http: panic serving [::1]:51873: runtime error: invalid memory address or nil pointer dereference
+goroutine 338 [running]:
+net/http.(*conn).serve.func1(0xc000148280)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc000423ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0000740e0, 0xc000298200)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0000740e0, 0xc000298200)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0000740e0, 0xc000298200)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0000740e0, 0xc000298200)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000148280, 0x138c960, 0xc0000be300)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 14:35:55 server.go:3139: http: panic serving [::1]:54215: runtime error: invalid memory address or nil pointer dereference
+goroutine 392 [running]:
+net/http.(*conn).serve.func1(0xc000148140)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0000b9ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0002a20e0, 0xc0002f0000)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0002a20e0, 0xc0002f0000)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0002a20e0, 0xc0002f0000)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0002a20e0, 0xc0002f0000)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000148140, 0x138c960, 0xc000154440)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/10 14:35:55 server.go:3139: http: panic serving [::1]:54216: runtime error: invalid memory address or nil pointer dereference
+goroutine 393 [running]:
+net/http.(*conn).serve.func1(0xc000148280)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d8280, 0x150c190)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc00013c008, 0xc0000bdac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers.delete(0x138c0d0, 0xc0001a21c0, 0xc0000b0200)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/server.go:221 +0x145
+net/http.HandlerFunc.ServeHTTP(0x1342460, 0x138c0d0, 0xc0001a21c0, 0xc0000b0200)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x1519040, 0x138c0d0, 0xc0001a21c0, 0xc0000b0200)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc0001a2000, 0x138c0d0, 0xc0001a21c0, 0xc0000b0200)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000148280, 0x138c960, 0xc0001544c0)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b

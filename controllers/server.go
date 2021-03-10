@@ -14,7 +14,7 @@ import (
 
 //const url string = "http://localhost:3000"
 
-const url string = "https://code-archives-client.vercel.app"
+const url string = "https://code-archives.com/"
 
 func StartWebServer() {
 	http.HandleFunc("/archive/", get)
