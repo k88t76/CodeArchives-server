@@ -199,7 +199,7 @@ func CreateGuestArchives() {
 			return
 		}`,
 			Title:    "server.go",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "go",
 		},
 		{Content: `async fn maybe_fail_hello(setting: bool) -> Result<String, dyn std::error::Error> {
@@ -216,7 +216,7 @@ func CreateGuestArchives() {
 			println!("{}", greeting);
 		}`,
 			Title:    "async.rs",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "rust",
 		},
 		{Content: `SELECT 
@@ -243,7 +243,7 @@ func CreateGuestArchives() {
 	ORDER BY id ASC 
 		`,
 			Title:    "SQL",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "sql",
 		},
 		{Content: `export async function getServerSideProps({res, req}) {
@@ -334,7 +334,7 @@ func CreateGuestArchives() {
 		  } 
 		  }`,
 			Title:    "index.jsx",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "jsx",
 		},
 		{Content: `FROM golang:1.12.0-alpine3.9
@@ -356,7 +356,7 @@ func CreateGuestArchives() {
 		CMD ["/go/src/app"]
 		`,
 			Title:    "Dockerfile",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "docker",
 		},
 		{Content: `package main
@@ -483,7 +483,7 @@ func CreateGuestArchives() {
 			fmt.Println(t[n])
 		}`,
 			Title:    "algorithm",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "go",
 		},
 		{Content: `import numpy as np
@@ -499,7 +499,7 @@ func CreateGuestArchives() {
 		print(vec(arr))
 		print(arr[vec(arr)])`,
 			Title:    "prime.py",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "python",
 		},
 		{Content: `for i in 1..100
@@ -514,7 +514,7 @@ func CreateGuestArchives() {
 		end
 		end`,
 			Title:    "fizzbuzz.rb",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "ruby",
 		},
 		{Content: `<!DOCTYPE html>
@@ -553,7 +553,7 @@ func CreateGuestArchives() {
 		 </body>
 		</html>`,
 			Title:    "template.html",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "html",
 		},
 		{Content: `package main
@@ -564,7 +564,7 @@ func CreateGuestArchives() {
 			fmt.Println("Hello, World!")
 		}`,
 			Title:    "Hello World",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "go",
 		},
 		{Content: `class ScalarSum{
@@ -602,7 +602,7 @@ func CreateGuestArchives() {
 		print(vec.tasu())
 		// -> "(3 , 7)"`,
 			Title:    "Class.swift",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "swift",
 		},
 		{Content: `class MainActivity : AppCompatActivity() {
@@ -641,7 +641,7 @@ func CreateGuestArchives() {
 			}
 		}`,
 			Title:    "MainActivity.kt",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "kotlin",
 		},
 		{Content: `export interface Archive {
@@ -691,7 +691,7 @@ func CreateGuestArchives() {
 			return json;
 		  }`,
 			Title:    "archive.ts",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "typescript",
 		},
 		{Content: ` #include<stdio.h>
@@ -733,7 +733,7 @@ func CreateGuestArchives() {
 	   }
 	   `,
 			Title:    "stringsort.c",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "c",
 		},
 		{Content: `using System;
@@ -762,7 +762,7 @@ func CreateGuestArchives() {
 			}
 		} `,
 			Title:    "namespace.cs",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "csharp",
 		},
 		{Content: `#include <iostream>
@@ -786,12 +786,12 @@ func CreateGuestArchives() {
 			return 0;
 		}`,
 			Title:    "bubblesort.cpp",
-			Author:   "guest-user2",
+			Author:   "guest-user",
 			Language: "cpp",
 		},
 	}
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE author = ?", tableNameArchives)
-	db.Exec(cmd, "guest-user2")
+	db.Exec(cmd, "guest-user")
 	for _, a := range guestArchives {
 		cmd = fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
 		db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"))
