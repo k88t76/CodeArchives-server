@@ -106,10 +106,7 @@ func search(w http.ResponseWriter, r *http.Request) {
 }
 
 func signIn(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", url)
-	w.Header().Set("Access-Control-Allow-Credentials", "true")
-	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	setHeader(w)
 	fmt.Printf("r.Method: %v\n", r.Method)
 	len := r.ContentLength
 	body := make([]byte, len)
@@ -139,11 +136,7 @@ func signIn(w http.ResponseWriter, r *http.Request) {
 }
 
 func signUp(w http.ResponseWriter, r *http.Request) {
-	//setHeader(w)
-	w.Header().Set("Access-Control-Allow-Origin", url)
-	w.Header().Set("Access-Control-Allow-Credentials", "true")
-	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	setHeader(w)
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -254,10 +247,7 @@ func setHeader(w http.ResponseWriter) {
 }
 
 func guestSignIn(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", url)
-	w.Header().Set("Access-Control-Allow-Credentials", "true")
-	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	setHeader(w)
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
