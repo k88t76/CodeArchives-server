@@ -24,12 +24,12 @@ func init() {
 	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives?parseTime=true", config.Config.Dbpass, config.Config.CloudSQL))
 
 	/*
-	// db connection for local
-	db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
-	if err != nil {
-		fmt.Println(err)
-	}
-	*?
+		// db connection for local
+		db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
+		if err != nil {
+			fmt.Println(err)
+		}
+	*/
 	name := config.Config.DbName
 
 	cmd := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", name)
