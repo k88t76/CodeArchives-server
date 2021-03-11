@@ -1768,3 +1768,27 @@ net/http.(*conn).serve(0xc0001150e0, 0x138c960, 0xc000060f80)
 	/usr/local/go/src/net/http/server.go:1952 +0x8cd
 created by net/http.(*Server).Serve
 	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/11 02:02:42 server.go:36: Defaulting to port 8080
+2021/03/11 02:02:42 server.go:39: Listening on port 8080
+2021/03/11 02:04:13 server.go:37: Defaulting to port 8080
+2021/03/11 02:04:13 server.go:40: Listening on port 8080
+2021/03/11 02:28:40 server.go:329: http: named cookie not present
+2021/03/11 02:28:57 server.go:37: Defaulting to port 8080
+2021/03/11 02:28:57 server.go:40: Listening on port 8080
+2021/03/11 02:29:23 server.go:330: http: named cookie not present
+2021/03/11 02:29:31 server.go:37: Defaulting to port 8080
+2021/03/11 02:29:31 server.go:40: Listening on port 8080
+2021/03/11 02:31:06 server.go:330: http: named cookie not present
+2021/03/11 02:31:13 server.go:37: Defaulting to port 8080
+2021/03/11 02:31:13 server.go:40: Listening on port 8080
+2021/03/11 02:32:40 server.go:330: http: named cookie not present
+2021/03/11 02:32:50 server.go:37: Defaulting to port 8080
+2021/03/11 02:32:50 server.go:40: Listening on port 8080
+2021/03/11 02:37:01 server.go:37: Defaulting to port 8080
+2021/03/11 02:37:01 server.go:40: Listening on port 8080
+2021/03/11 02:37:17 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers.getCookie (server.go:333)
+2021/03/11 02:37:39 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers.getCookie (server.go:333)
+2021/03/11 10:37:36 server.go:37: Defaulting to port 8080
+2021/03/11 10:37:36 server.go:40: Listening on port 8080
+2021/03/11 10:42:06 server.go:37: Defaulting to port 8080
+2021/03/11 10:42:06 server.go:40: Listening on port 8080

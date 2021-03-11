@@ -13,6 +13,7 @@ import (
 )
 
 //const url string = "http://localhost:3000"
+
 const url string = "https://code-archives-client.vercel.app"
 
 func StartWebServer() {
@@ -27,7 +28,7 @@ func StartWebServer() {
 	http.HandleFunc("/userbytoken", userByToken)
 	http.HandleFunc("/guestsignin", guestSignIn)
 	http.HandleFunc("/setcookie", setCookie)
-	http.HandleFunc("/getcookie", getCookie)
+	http.HandleFunc("/deletecookie", deleteCookie)
 
 	// [START setting_port]
 	port := os.Getenv("PORT")
@@ -296,25 +297,21 @@ func setCookie(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	r.Body.Read(body)
-	var s string
-	json.Unmarshal(body, &s)
+	var token string
+	json.Unmarshal(body, &token)
 	cookie := &http.Cookie{
 		Name:     "cookie",
-		Value:    s,
+		Value:    token,
 		Expires:  time.Now().Add(24 * time.Hour),
 		HttpOnly: true,
 		Secure:   true,
 		SameSite: http.SameSiteNoneMode,
+		//SameSite: http.SameSiteStrictMode,
 	}
 	http.SetCookie(w, cookie)
-	/* クッキー削除
-	c, _ := r.Cookie("cookie")
-	c.MaxAge = -1
-	http.SetCookie(w, c)
-	*/
 }
 
-func getCookie(w http.ResponseWriter, r *http.Request) {
+func deleteCookie(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", url)
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS")
@@ -325,10 +322,13 @@ func getCookie(w http.ResponseWriter, r *http.Request) {
 	}
 	c, err := r.Cookie("cookie")
 	if err != nil {
-		log.Fatal(err)
+		w.WriteHeader(http.StatusForbidden)
+	} else {
+		fmt.Println("cookie.Value: ", c.Value)
+		// クッキー削除
+		c, _ := r.Cookie("cookie")
+		c.MaxAge = -1
+		http.SetCookie(w, c)
+		w.WriteHeader(http.StatusOK)
 	}
-	fmt.Println("cookie.Value: ", c.Value)
-	output, _ := json.MarshalIndent(&c.Value, "", "\t\t")
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(output)
 }
