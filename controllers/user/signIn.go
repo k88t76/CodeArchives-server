@@ -32,10 +32,12 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		output, _ := json.MarshalIndent("Unknown User", "", "\t\t")
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(output)
+		w.WriteHeader(http.StatusUnauthorized)
 	} else {
 		output, _ := json.MarshalIndent("Wrong Password", "", "\t\t")
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(output)
+		w.WriteHeader(http.StatusUnauthorized)
 	}
 	return
 }
