@@ -333,7 +333,7 @@ func CreateGuestArchives() {
 			)
 		  } 
 		  }`,
-			Title:    "index.js",
+			Title:    "index.jsx",
 			Author:   "guest-user",
 			Language: "jsx",
 		},
@@ -566,6 +566,228 @@ func CreateGuestArchives() {
 			Title:    "Hello World",
 			Author:   "guest-user",
 			Language: "go",
+		},
+		{Content: `class ScalarSum{
+			var x1,x2 :Int
+			func tasu() -> String{
+				return String(x1 + x2)
+			}
+		
+			init(x1 :Int, x2 :Int){
+				self.x1 = x1
+				self.x2 = x2
+			}
+		}
+		
+		class VectorSum :ScalarSum{
+			var y1,y2 :Int
+		
+			//親クラスのtasuメソッドをオーバーラード
+			override func tasu() -> String{
+				return "(\(x1+x2) , \(y1+y2))"
+			}
+		
+			init(x1 :Int, x2 :Int, y1 :Int, y2 :Int){
+				self.y1 = y1
+				self.y2 = y2
+				//親クラスのinitを呼び出す
+				super.init(x1: x1,x2: x2)
+			}
+		}
+		
+		var scl = ScalarSum(x1: 1, x2: 2)
+		print(scl.tasu())
+		// -> 3
+		var vec = VectorSum(x1: 1,x2: 2, y1: 3, y2: 4)
+		print(vec.tasu())
+		// -> "(3 , 7)"`,
+			Title:    "Class.swift",
+			Author:   "guest-user",
+			Language: "swift",
+		},
+		{Content: `class MainActivity : AppCompatActivity() {
+
+			override fun onCreate(savedInstanceState: Bundle?) {
+				super.onCreate(savedInstanceState)
+				setContentView(R.layout.activity_main)
+				button.setOnClickListener {
+					MyAsyncTask().execute()
+				}
+			}
+		
+			inner class MyAsyncTask : AsyncTask<Void, Int, Void>() {
+		
+				override fun onPreExecute() {
+					text.setText("始めます")
+					Thread.sleep(800)
+				}
+		
+				override fun doInBackground(vararg param: Void?): Void? {
+					for (i in 1..10) {
+						publishProgress(i)
+						Thread.sleep(800)
+					}
+					return null
+				}
+		
+				override fun onProgressUpdate(vararg values: Int?) {
+					text.setText(values[0].toString())
+				}
+		
+				override fun onPostExecute(result: Void?) {
+					text.setText("終わります")
+				}
+		
+			}
+		}`,
+			Title:    "MainActivity.kt",
+			Author:   "guest-user",
+			Language: "kotlin",
+		},
+		{Content: `export interface Archive {
+			uuid: string;
+			content: string;
+			title: string;
+			author: string;
+			language: string;
+			created_at: string;
+		  }
+		  
+		  export async function fetchArchives(token: string, search?: string): Promise<Archive[] | null> {
+			var path = ${url}/archives;
+			if (search) {
+			  path = ${url}/search/${search};
+			}
+			const response = await fetch(path, {
+			  method: 'POST',
+			  mode: 'cors',
+			  headers: { 'Content-Type': 'application/json' },
+			  body: JSON.stringify(token),
+			})
+			  .then((res: Response) => res)
+			  .catch((error) => {
+				console.error(error);
+				return null;
+			  });
+		  
+			if (!response) {
+			  return null;
+			}
+		  
+			const json = await response
+			  .json()
+			  .then((json: Archive[]) => {
+				return json;
+			  })
+			  .catch((error) => {
+				console.error(error);
+				return null;
+			  });
+		  
+			if (!json) {
+			  return null;
+			}
+		  
+			return json;
+		  }`,
+			Title:    "archive.ts",
+			Author:   "guest-user",
+			Language: "typescript",
+		},
+		{Content: ` #include<stdio.h>
+		#include<string.h>
+		
+	   int main(void)
+	   {
+		
+		 int i, j;
+		
+		 /* 文字列の数 */
+		 int num = 3;
+		
+		 /* 文字列 */
+		 char moji[3][20], tmp[20];
+		
+		 /* 3つの文字列を入力 */
+		 printf("\n◆3つの文字列（半角英数字）を入力してください\n");
+		 for (i=0;i<num;i++) {
+		   printf("%dつめの文字列 = ", i+1);
+		   scanf("%s", moji[i]);
+		 }
+		
+		 for(i=1;i<num;i++){
+		   for(j=1;j<num;j++){
+			 if(strcmp(moji[j-1], moji[j])>0){
+			   strcpy(tmp, moji[j-1]);
+			   strcpy(moji[j-1], moji[j]);
+			   strcpy(moji[j], tmp);
+			 }
+		   }
+		 }
+		
+		 printf("\n◆文字列をソートしました。\n");
+		 for (i=0;i<num;i++)
+		   printf("%s\n", moji[i]);
+		
+		 return 0;
+	   }
+	   `,
+			Title:    "stringsort.c",
+			Author:   "guest-user",
+			Language: "c",
+		},
+		{Content: `using System;
+
+		// 自動で定義された名前空間
+		namespace Test
+		{
+			class Program
+			{
+				static void Main(string[] args)
+				{
+					//名前空間「Test2」 -> 「Programクラス」 -> 「num」変数にアクセス
+					int num = Test2.Program.num;
+		 
+					Console.WriteLine(num);
+				}
+			}
+		}
+		 
+		// 自分で定義した名前空間
+		namespace Test2
+		{
+			class Program
+			{
+				public int num = 100;
+			}
+		} `,
+			Title:    "namespace.cs",
+			Author:   "guest-user",
+			Language: "csharp",
+		},
+		{Content: `#include <iostream>
+		using namespace std;
+		
+		int N, A[10009];
+		
+		int main() {
+			cin >> N;
+			for (int i = 1; i <= N; i++) cin >> A[i];
+		
+			// {A[1], A[2], ..., A[N]} を小さい順にバブルソートする
+			for (int i = 1; i <= N; i++) {
+				for (int j = 1; j <= N - i; j++) {
+					if (A[j] > A[j + 1]) swap(A[j], A[j + 1]);
+				}
+			}
+		
+			// ソートされた配列を出力する
+			for (int i = 1; i <= N; i++) cout << A[i] << endl;
+			return 0;
+		}`,
+			Title:    "bubblesort.cpp",
+			Author:   "guest-user",
+			Language: "cpp",
 		},
 	}
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE author = ?", tableNameArchives)
