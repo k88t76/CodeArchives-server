@@ -30,7 +30,10 @@ func HandleArchive(w http.ResponseWriter, r *http.Request) {
 
 func get(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
-	archive := models.GetArchive(uuid)
+	archive, err := models.GetArchive(uuid)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 	output, err := json.MarshalIndent(&archive, "", "\t\t")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -54,7 +57,10 @@ func create(w http.ResponseWriter, r *http.Request) {
 
 func edit(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
-	archive := models.GetArchive(uuid)
+	archive, err := models.GetArchive(uuid)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 	length := r.ContentLength
 	body := make([]byte, length)
 	r.Body.Read(body)
@@ -62,7 +68,7 @@ func edit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.Unmarshal(body, &archive)
-	err := archive.Update()
+	err = archive.Update()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -74,8 +80,11 @@ func delete(w http.ResponseWriter, r *http.Request) {
 	if uuid == "" {
 		return
 	}
-	archive := models.GetArchive(uuid)
-	err := archive.Delete()
+	archive, err := models.GetArchive(uuid)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	err = archive.Delete()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

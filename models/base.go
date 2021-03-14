@@ -3,7 +3,6 @@ package models
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	"github.com/k88t76/CodeArchives-server/config"
 
@@ -23,30 +22,29 @@ func init() {
 	var err error
 	db, err = sql.Open(config.Config.SQLDriver, fmt.Sprintf("root:%s@unix(/cloudsql/%s)/code_archives?parseTime=true", config.Config.Dbpass, config.Config.CloudSQL))
 
+	// db connection for local
+	db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"code_archives_test?parseTime=true&loc=Asia%2FTokyo")
+	if err != nil {
+		fmt.Println(err)
+	}
 	/*
-		// db connection for local
-		db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"?parseTime=true&loc=Asia%2FTokyo")
+		name := config.Config.DbName
+
+		cmd := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", name)
+		_, err = db.Exec(cmd)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalln(err)
+		}
+
+		cmd = fmt.Sprintf("USE %s", name)
+		_, err = db.Exec(cmd)
+		if err != nil {
+			log.Fatalln(err)
 		}
 	*/
 
-	name := config.Config.DbName
-
-	cmd := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", name)
-	_, err = db.Exec(cmd)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	cmd = fmt.Sprintf("USE %s", name)
-	_, err = db.Exec(cmd)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
 	// create archivesTable
-	cmd = fmt.Sprintf(`
+	cmd := fmt.Sprintf(`
 		CREATE TABLE IF NOT EXISTS %s (
 		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 		uuid VARCHAR(36) NOT NULL, 

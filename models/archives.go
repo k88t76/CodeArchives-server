@@ -30,16 +30,16 @@ func NewArchive(id int64, uuid string, content string, title string, author stri
 	}
 }
 
-func GetArchive(uuid string) *Archive {
+func GetArchive(uuid string) (*Archive, error) {
 	cmd := fmt.Sprintf("SELECT id, uuid, content, title, author, language, created_at FROM %s WHERE uuid = ?", tableNameArchives)
 	row := db.QueryRow(cmd, uuid)
 	var archive Archive
 	err := row.Scan(&archive.ID, &archive.UUID, &archive.Content, &archive.Title, &archive.Author, &archive.Language, &archive.CreatedAt)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 	archive.CreatedAt = strings.Split(archive.CreatedAt, "T")[0]
-	return NewArchive(archive.ID, archive.UUID, archive.Content, archive.Title, archive.Author, archive.Language, archive.CreatedAt)
+	return NewArchive(archive.ID, archive.UUID, archive.Content, archive.Title, archive.Author, archive.Language, archive.CreatedAt), nil
 }
 
 func GetArchivesByUser(userName string, limit int) ([]Archive, error) {
