@@ -23,7 +23,6 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(user)
 	fmt.Println(user.Validate())
 	if user.Validate() {
-		fmt.Println("validation OK")
 		err := user.Create()
 		token, err := user.CreateSession()
 		fmt.Println(token)
@@ -36,8 +35,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 	} else {
 		output, _ := json.MarshalIndent("UsedName", "", "\t\t")
 		w.Header().Set("Content-Type", "application/json")
-		w.Write(output)
 		w.WriteHeader(http.StatusUnauthorized)
+		w.Write(output)
 	}
-	return
 }

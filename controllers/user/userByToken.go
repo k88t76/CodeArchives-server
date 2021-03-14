@@ -28,5 +28,4 @@ func UserByToken(w http.ResponseWriter, r *http.Request) {
 	output, _ := json.MarshalIndent(&name, "", "\t\t")
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(output)
-	return
 }

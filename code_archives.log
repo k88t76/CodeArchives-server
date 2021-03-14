@@ -2940,3 +2940,469 @@ net/http.(*conn).serve(0xc000278000, 0x138c8e0, 0xc00022e0c0)
 	/usr/local/go/src/net/http/server.go:1952 +0x8cd
 created by net/http.(*Server).Serve
 	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 10:10:17 server.go:28: Defaulting to port 8080
+2021/03/13 10:10:17 server.go:31: Listening on port 8080
+2021/03/13 10:16:18 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 10:18:29 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 10:18:54 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 10:19:28 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 10:22:54 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 10:23:22 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:15:40 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:18:40 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:21:29 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:28:55 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:33:06 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:37:56 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:38:52 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:40:47 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:43:03 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:40)
+2021/03/13 11:46:41 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:47:20 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:47:40 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:48:14 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:49:41 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:51:27 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 11:53:41 server.go:28: Defaulting to port 8080
+2021/03/13 11:53:41 server.go:31: Listening on port 8080
+2021/03/13 11:54:24 server.go:3139: http: panic serving [::1]:50009: runtime error: invalid memory address or nil pointer dereference
+goroutine 14 [running]:
+net/http.(*conn).serve.func1(0xc0001152c0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc000010018, 0xc000105ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0001602a0, 0xc00011a400)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0001602a0, 0xc00011a400)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0001602a0, 0xc00011a400)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000160000, 0x138a170, 0xc0001602a0, 0xc00011a400)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0001152c0, 0x138aa00, 0xc000060800)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 11:54:44 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 12:02:26 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 12:09:12 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 12:13:27 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 12:14:52 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:31:06 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:32:27 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:33:27 server.go:28: Defaulting to port 8080
+2021/03/13 14:33:27 server.go:31: Listening on port 8080
+2021/03/13 14:35:21 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:38:32 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:38:42 server.go:3139: http: panic serving [::1]:51403: runtime error: invalid memory address or nil pointer dereference
+goroutine 33 [running]:
+net/http.(*conn).serve.func1(0xc0000c9360)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc00009dac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc00007a9a0, 0xc000208a00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc00007a9a0, 0xc000208a00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc00007a9a0, 0xc000208a00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc00007a9a0, 0xc000208a00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000c9360, 0x138aa00, 0xc0000d4d40)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 14:42:02 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:44:09 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:58:25 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 14:59:14 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:00:13 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:01:24 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:05:05 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:05:59 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:06:38 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:07:13 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:09:21 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:10:26 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:15:17 server.go:3139: http: panic serving [::1]:51874: runtime error: invalid memory address or nil pointer dereference
+goroutine 176 [running]:
+net/http.(*conn).serve.func1(0xc000195720)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc0001d7ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0001256c0, 0xc00014e400)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0001256c0, 0xc00014e400)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0001256c0, 0xc00014e400)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc0001256c0, 0xc00014e400)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000195720, 0x138aa00, 0xc0001ed180)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:20:08 server.go:3139: http: panic serving [::1]:51932: runtime error: invalid memory address or nil pointer dereference
+goroutine 209 [running]:
+net/http.(*conn).serve.func1(0xc00015a320)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc00009fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0001fe380, 0xc0001f6d00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0001fe380, 0xc0001f6d00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0001fe380, 0xc0001f6d00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc0001fe380, 0xc0001f6d00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00015a320, 0x138aa00, 0xc000145900)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:24:00 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:24:16 server.go:3139: http: panic serving [::1]:51977: runtime error: invalid memory address or nil pointer dereference
+goroutine 189 [running]:
+net/http.(*conn).serve.func1(0xc0002079a0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc0001d7ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc00016a380, 0xc00014f300)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc00016a380, 0xc00014f300)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc00016a380, 0xc00014f300)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc00016a380, 0xc00014f300)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0002079a0, 0x138aa00, 0xc0002537c0)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:25:09 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:31:49 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:32:50 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:33:27 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:33:38 server.go:3139: http: panic serving [::1]:52126: runtime error: invalid memory address or nil pointer dereference
+goroutine 273 [running]:
+net/http.(*conn).serve.func1(0xc00027e1e0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc0000a1ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0002e01c0, 0xc0002c2e00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0002e01c0, 0xc0002c2e00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0002e01c0, 0xc0002c2e00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc0002e01c0, 0xc0002c2e00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00027e1e0, 0x138aa00, 0xc00027aac0)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:33:49 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:34:01 server.go:3139: http: panic serving [::1]:52160: runtime error: invalid memory address or nil pointer dereference
+goroutine 303 [running]:
+net/http.(*conn).serve.func1(0xc00027e6e0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc00009fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc000263960, 0xc0002c3000)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc000263960, 0xc0002c3000)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc000263960, 0xc0002c3000)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc000263960, 0xc0002c3000)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc00027e6e0, 0x138aa00, 0xc00027b640)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:34:18 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:34:37 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:34:51 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:34:59 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:35:05 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:35:12 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:35:24 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:35:33 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:35:47 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:36:17 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:36:23 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:38:57 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:39:09 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:48:15 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:48:31 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:48:37 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:48:43 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:48:49 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:48:55 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:49:00 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:49:06 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:50:14 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:50:25 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 15:50:40 server.go:3139: http: panic serving [::1]:52521: runtime error: invalid memory address or nil pointer dereference
+goroutine 516 [running]:
+net/http.(*conn).serve.func1(0xc0002bdae0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc0001d9ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc000361180, 0xc00036eb00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc000361180, 0xc00036eb00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc000361180, 0xc00036eb00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc000361180, 0xc00036eb00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0002bdae0, 0x138aa00, 0xc00042f040)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:51:34 server.go:3139: http: panic serving [::1]:52573: runtime error: invalid memory address or nil pointer dereference
+goroutine 545 [running]:
+net/http.(*conn).serve.func1(0xc0003766e0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc00009fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0003615e0, 0xc00036f000)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0003615e0, 0xc00036f000)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0003615e0, 0xc00036f000)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc0003615e0, 0xc00036f000)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0003766e0, 0x138aa00, 0xc00037a380)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:51:51 server.go:3139: http: panic serving [::1]:52586: runtime error: invalid memory address or nil pointer dereference
+goroutine 583 [running]:
+net/http.(*conn).serve.func1(0xc0003fc0a0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc0001d9ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc000361960, 0xc00036f500)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc000361960, 0xc00036f500)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc000361960, 0xc00036f500)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc000361960, 0xc00036f500)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0003fc0a0, 0x138aa00, 0xc0003df240)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 15:52:55 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:06:06 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:07:33 server.go:28: Defaulting to port 8080
+2021/03/13 18:07:33 server.go:31: Listening on port 8080
+2021/03/13 18:08:30 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:10:26 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:10:52 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:43:40 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:43:40 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:43:46 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:44:43 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:50:33 server.go:3139: http: panic serving [::1]:58412: runtime error: invalid memory address or nil pointer dereference
+goroutine 63 [running]:
+net/http.(*conn).serve.func1(0xc000113860)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc000010018, 0xc0000e1ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0001be8c0, 0xc0001b8a00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0001be8c0, 0xc0001b8a00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0001be8c0, 0xc0001b8a00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000160000, 0x138a170, 0xc0001be8c0, 0xc0001b8a00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000113860, 0x138aa00, 0xc00011dc80)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 18:50:59 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 18:56:16 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 19:06:29 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 19:29:27 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:40)
+2021/03/13 19:29:40 server.go:28: Defaulting to port 8080
+2021/03/13 19:29:40 server.go:31: Listening on port 8080
+2021/03/13 19:29:49 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/13 19:30:26 server.go:3139: http: panic serving [::1]:52321: runtime error: invalid memory address or nil pointer dereference
+goroutine 26 [running]:
+net/http.(*conn).serve.func1(0xc0000c90e0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc00009dac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc00007a460, 0xc000212500)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc00007a460, 0xc000212500)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc00007a460, 0xc000212500)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc00007a460, 0xc000212500)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000c90e0, 0x138aa00, 0xc0000d4740)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 19:34:09 server.go:3139: http: panic serving [::1]:53435: runtime error: invalid memory address or nil pointer dereference
+goroutine 117 [running]:
+net/http.(*conn).serve.func1(0xc0000c99a0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc0001cbac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc000125420, 0xc0000d1a00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc000125420, 0xc0000d1a00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc000125420, 0xc0000d1a00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc000125420, 0xc0000d1a00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000c99a0, 0x138aa00, 0xc0000d5fc0)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 19:34:26 server.go:3139: http: panic serving [::1]:53547: runtime error: invalid memory address or nil pointer dereference
+goroutine 127 [running]:
+net/http.(*conn).serve.func1(0xc0000c9d60)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc00009fac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0001255e0, 0xc0000d1d00)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0001255e0, 0xc0000d1d00)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0001255e0, 0xc0000d1d00)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc0001255e0, 0xc0000d1d00)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000c9d60, 0x138aa00, 0xc0003f0540)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 19:35:12 server.go:3139: http: panic serving [::1]:53743: runtime error: invalid memory address or nil pointer dereference
+goroutine 164 [running]:
+net/http.(*conn).serve.func1(0xc000193360)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc0000ba008, 0xc0001c5ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc000125880, 0xc000482100)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc000125880, 0xc000482100)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc000125880, 0xc000482100)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc000124000, 0x138a170, 0xc000125880, 0xc000482100)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc000193360, 0x138aa00, 0xc00041a480)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/13 19:39:18 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:01:25 server.go:28: Defaulting to port 8080
+2021/03/14 15:01:25 server.go:31: Listening on port 8080
+2021/03/14 15:20:11 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:20:37 server.go:3139: http: panic serving [::1]:60622: runtime error: invalid memory address or nil pointer dereference
+goroutine 37 [running]:
+net/http.(*conn).serve.func1(0xc0000c6140)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc000134008, 0xc000117ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc0000da540, 0xc0000d0600)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc0000da540, 0xc0000d0600)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc0000da540, 0xc0000d0600)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc00019a000, 0x138a170, 0xc0000da540, 0xc0000d0600)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000c6140, 0x138aa00, 0xc0000a6240)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/14 15:20:41 server.go:3139: http: panic serving [::1]:60658: runtime error: invalid memory address or nil pointer dereference
+goroutine 16 [running]:
+net/http.(*conn).serve.func1(0xc0000723c0)
+	/usr/local/go/src/net/http/server.go:1824 +0x153
+panic(0x12d5aa0, 0x15091f0)
+	/usr/local/go/src/runtime/panic.go:971 +0x499
+github.com/k88t76/CodeArchives-server/models.(*Archive).Delete(0x0, 0xc000134008, 0xc000119ac8)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/models/archives.go:124 +0xac
+github.com/k88t76/CodeArchives-server/controllers/archive.Delete(0x138a170, 0xc00007e540, 0xc000076600)
+	/Users/k88t76_home/go/src/github.com/k88t76/CodeArchives-server/controllers/archive/delete.go:21 +0x3c5
+net/http.HandlerFunc.ServeHTTP(0x1340a38, 0x138a170, 0xc00007e540, 0xc000076600)
+	/usr/local/go/src/net/http/server.go:2069 +0x44
+net/http.(*ServeMux).ServeHTTP(0x15160a0, 0x138a170, 0xc00007e540, 0xc000076600)
+	/usr/local/go/src/net/http/server.go:2448 +0x1ad
+net/http.serverHandler.ServeHTTP(0xc00019a000, 0x138a170, 0xc00007e540, 0xc000076600)
+	/usr/local/go/src/net/http/server.go:2887 +0xa3
+net/http.(*conn).serve(0xc0000723c0, 0x138aa00, 0xc000060940)
+	/usr/local/go/src/net/http/server.go:1952 +0x8cd
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3013 +0x39b
+2021/03/14 15:20:54 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:20:59 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:20:59 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:21:12 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:21:12 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:21:28 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:21:28 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/user.SignIn (signIn.go:35)
+2021/03/14 15:22:23 server.go:28: Defaulting to port 8080
+2021/03/14 15:22:23 server.go:31: Listening on port 8080
+2021/03/14 15:25:45 server.go:28: Defaulting to port 8080
+2021/03/14 15:25:45 server.go:31: Listening on port 8080
+2021/03/14 15:26:51 server.go:28: Defaulting to port 8080
+2021/03/14 15:26:51 server.go:31: Listening on port 8080
+2021/03/14 15:28:35 server.go:28: Defaulting to port 8080
+2021/03/14 15:28:35 server.go:31: Listening on port 8080
+2021/03/14 15:39:18 server.go:28: Defaulting to port 8080
+2021/03/14 15:39:18 server.go:31: Listening on port 8080
+2021/03/14 15:43:10 server.go:28: Defaulting to port 8080
+2021/03/14 15:43:10 server.go:31: Listening on port 8080
+2021/03/14 15:50:40 server.go:25: Defaulting to port 8080
+2021/03/14 15:50:40 server.go:28: Listening on port 8080
+2021/03/14 15:54:06 server.go:25: Defaulting to port 8080
+2021/03/14 15:54:06 server.go:28: Listening on port 8080
+2021/03/14 15:56:21 server.go:25: Defaulting to port 8080
+2021/03/14 15:56:21 server.go:28: Listening on port 8080
+2021/03/14 16:00:53 server.go:25: Defaulting to port 8080
+2021/03/14 16:00:53 server.go:28: Listening on port 8080

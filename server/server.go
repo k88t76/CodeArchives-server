@@ -10,16 +10,13 @@ import (
 )
 
 func StartWebServer() {
-	http.HandleFunc("/archive/", archive.Get)
+	http.HandleFunc("/archive/", archive.HandleArchive)
 	http.HandleFunc("/archives", archive.GetAll)
-	http.HandleFunc("/create", archive.Create)
-	http.HandleFunc("/edit/", archive.Edit)
-	http.HandleFunc("/delete/", archive.Delete)
 	http.HandleFunc("/search/", archive.Search)
 	http.HandleFunc("/signin", user.SignIn)
 	http.HandleFunc("/signup", user.SignUp)
 	http.HandleFunc("/userbytoken", user.UserByToken)
-	http.HandleFunc("/guestsignin", user.GuestSignIn)
+	http.HandleFunc("/guest-signin", user.GuestSignIn)
 
 	// [START setting_port]
 	port := os.Getenv("PORT")
