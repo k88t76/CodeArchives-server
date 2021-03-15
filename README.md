@@ -22,3 +22,5 @@
 - ユーザー登録・認証機能
 
 アプリの url: https://code-archives-client.vercel.app/
+
+(ゲストサインインではサンプルコード生成のためサインインに時間がかかります)
