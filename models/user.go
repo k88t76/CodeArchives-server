@@ -43,28 +43,16 @@ func NewSession(id int64, uuid string, token string, userID string, createdAt st
 	}
 }
 
-func (s *Session) Check() (valid bool, err error) {
-	cmd := fmt.Sprintf("SELECT id, uuid, token, user_id, created_at FROM %s WHERE uuid = ?", tableNameSessions)
-	row := db.QueryRow(cmd, s.UUID)
-	err = row.Scan(&s.ID, &s.UUID, &s.Token, &s.UserID, &s.CreatedAt)
-	if err != nil {
-		valid = false
-		return valid, err
-	}
-	valid = true
-	return valid, err
-}
-
-func GetUser(sessionUUID string) *User {
+func GetUser(sessionUUID string) (*User, error) {
 	cmd := fmt.Sprintf("SELECT id, uuid, name, password, created_at FROM %s WHERE uuid = ?", tableNameUsers)
 
 	row := db.QueryRow(cmd, sessionUUID)
 	var user User
 	err := row.Scan(&user.ID, &user.UUID, &user.Name, &user.Password, &user.CreatedAt)
 	if err != nil {
-		return nil
+		return nil, err
 	}
-	return NewUser(user.ID, user.UUID, user.Name, user.Password, user.CreatedAt)
+	return NewUser(user.ID, user.UUID, user.Name, user.Password, user.CreatedAt), nil
 }
 
 func (u *User) Create() error {
@@ -96,21 +84,8 @@ func (u *User) Validate() bool {
 	}
 }
 
-func GetSession(uUUID string) *Session {
-	cmd := fmt.Sprintf("SELECT id, uuid, token, user_id, created_at FROM %s WHERE user_id = ?", tableNameSessions)
-	//err = Db.QueryRow("SELECT id, uuid, email, user_id, created_at FROM sessions WHERE user_id = $1", user.Id).
-	row := db.QueryRow(cmd, uUUID)
-	var session Session
-	err := row.Scan(&session.ID, &session.UUID, &session.Token, &session.UserID, &session.CreatedAt)
-	if err != nil {
-		return nil
-	}
-	return NewSession(session.ID, session.UUID, session.Token, session.UserID, session.CreatedAt)
-}
-
 func (u *User) Delete() error {
 	cmd := fmt.Sprintf("DELETE FROM %s WHERE UUID = ?", tableNameUsers)
-	//statement := "delete from users where id = $1"
 	_, err := db.Exec(cmd, u.UUID)
 	if err != nil {
 		return err

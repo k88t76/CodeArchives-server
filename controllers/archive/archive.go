@@ -15,20 +15,20 @@ func HandleArchive(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "GET":
-		get(w, r)
+		getArchive(w, r)
 	case "POST":
-		create(w, r)
+		postArchive(w, r)
 	case "PUT":
-		edit(w, r)
+		putArchive(w, r)
 	case "DELETE":
-		delete(w, r)
+		deleteArchive(w, r)
 	default:
 		return
 	}
 
 }
 
-func get(w http.ResponseWriter, r *http.Request) {
+func getArchive(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
 	archive, err := models.GetArchive(uuid)
 	if err != nil {
@@ -42,7 +42,7 @@ func get(w http.ResponseWriter, r *http.Request) {
 	w.Write(output)
 }
 
-func create(w http.ResponseWriter, r *http.Request) {
+func postArchive(w http.ResponseWriter, r *http.Request) {
 	len := r.ContentLength
 	body := make([]byte, len)
 	r.Body.Read(body)
@@ -55,7 +55,7 @@ func create(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-func edit(w http.ResponseWriter, r *http.Request) {
+func putArchive(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
 	archive, err := models.GetArchive(uuid)
 	if err != nil {
@@ -75,7 +75,7 @@ func edit(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-func delete(w http.ResponseWriter, r *http.Request) {
+func deleteArchive(w http.ResponseWriter, r *http.Request) {
 	uuid := path.Base(r.URL.Path)
 	if uuid == "" {
 		return
