@@ -39,6 +39,7 @@ func getArchive(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 	w.Write(output)
 }
 
@@ -48,11 +49,18 @@ func postArchive(w http.ResponseWriter, r *http.Request) {
 	r.Body.Read(body)
 	var archive models.Archive
 	json.Unmarshal(body, &archive)
-	err := archive.Create()
+	uuid, err := archive.Create()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+	output, err := json.MarshalIndent(&uuid, "", "\t\t")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
+	w.Write(output)
+
 }
 
 func putArchive(w http.ResponseWriter, r *http.Request) {

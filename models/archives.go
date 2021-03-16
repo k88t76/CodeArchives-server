@@ -98,16 +98,17 @@ func GetMatchArchive(search string, userName string) ([]Archive, error) {
 
 }
 
-func (a *Archive) Create() error {
+func (a *Archive) Create() (string, error) {
 	if a.Content == "" {
-		return nil
+		return "", nil
 	}
+	uuid := CreateUUID()
 	cmd := fmt.Sprintf("INSERT INTO %s (uuid, content, title, author, language, created_at) VALUES (?, ?, ?, ?, ?, ?)", tableNameArchives)
-	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Author, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"))
+	_, err := db.Exec(cmd, uuid, a.Content, a.Title, a.Author, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"))
 	if err != nil {
-		return err
+		return "", err
 	}
-	return nil
+	return uuid, nil
 }
 
 func (a *Archive) Update() error {
