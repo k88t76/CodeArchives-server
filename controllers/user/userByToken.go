@@ -2,7 +2,6 @@ package user
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/k88t76/CodeArchives-server/models"
@@ -22,10 +21,14 @@ func UserByToken(w http.ResponseWriter, r *http.Request) {
 	}
 	name, err := models.GetUserNameByToken(token)
 	if err != nil {
-		return
+		output, _ := json.MarshalIndent("Invalid Token", "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(output)
+	} else {
+		output, _ := json.MarshalIndent(&name, "", "\t\t")
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(output)
 	}
-	fmt.Println(name)
-	output, _ := json.MarshalIndent(&name, "", "\t\t")
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(output)
 }

@@ -111,13 +111,14 @@ func (a *Archive) Create() (string, error) {
 	return uuid, nil
 }
 
-func (a *Archive) Update() error {
+func (a *Archive) Update() (string, error) {
+	uuid := CreateUUID()
 	cmd := fmt.Sprintf("UPDATE %s SET uuid = ?, content = ?, title = ?, language = ?, created_at = ? WHERE uuid = ?", tableNameArchives)
-	_, err := db.Exec(cmd, CreateUUID(), a.Content, a.Title, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"), a.UUID)
+	_, err := db.Exec(cmd, uuid, a.Content, a.Title, a.Language, time.Now().In(time.FixedZone("Asia/Tokyo", 9*60*60)).Format("2006-01-02T15:04:05+09:00"), a.UUID)
 	if err != nil {
-		return err
+		return "", err
 	}
-	return nil
+	return uuid, nil
 }
 
 func (a *Archive) Delete() error {

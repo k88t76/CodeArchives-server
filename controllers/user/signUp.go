@@ -20,8 +20,6 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 	if user.Name == "" {
 		return
 	}
-	fmt.Println(user)
-	fmt.Println(user.Validate())
 	if user.Validate() {
 		err := user.Create()
 		token, err := user.CreateSession()

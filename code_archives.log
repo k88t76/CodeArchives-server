@@ -3418,3 +3418,18 @@ created by net/http.(*Server).Serve
 2021/03/15 14:32:59 server.go:28: Listening on port 8080
 2021/03/16 14:18:22 server.go:25: Defaulting to port 8080
 2021/03/16 14:18:22 server.go:28: Listening on port 8080
+2021/03/16 14:22:52 server.go:25: Defaulting to port 8080
+2021/03/16 14:22:52 server.go:28: Listening on port 8080
+2021/03/17 12:23:39 server.go:25: Defaulting to port 8080
+2021/03/17 12:23:39 server.go:28: Listening on port 8080
+2021/03/17 15:23:17 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.getArchive (archive.go:42)
+2021/03/17 15:23:18 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.getArchive (archive.go:42)
+2021/03/17 15:23:18 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.getArchive (archive.go:42)
+2021/03/20 00:23:42 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.getArchive (archive.go:42)
+2021/03/20 00:23:44 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.getArchive (archive.go:42)
+2021/03/20 00:23:45 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.getArchive (archive.go:42)
+2021/03/20 00:54:55 server.go:25: Defaulting to port 8080
+2021/03/20 00:54:55 server.go:28: Listening on port 8080
+2021/03/20 00:54:55 server.go:30: listen tcp :8080: bind: address already in use
+2021/03/20 00:55:04 server.go:25: Defaulting to port 8080
+2021/03/20 00:55:04 server.go:28: Listening on port 8080
