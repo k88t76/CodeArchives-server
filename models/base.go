@@ -25,11 +25,12 @@ func init() {
 
 	/*
 		// db connection for local
-		db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"code_archives_test?parseTime=true&loc=Asia%2FTokyo")
+		db, err = sql.Open(config.Config.SQLDriver, config.Config.DbAccess+"code_archives?parseTime=true&loc=Asia%2FTokyo")
 		if err != nil {
 			fmt.Println(err)
 		}
 	*/
+
 	name := config.Config.DbName
 
 	cmd := fmt.Sprintf("CREATE DATABASE IF NOT EXISTS %s", name)
@@ -49,7 +50,7 @@ func init() {
 		CREATE TABLE IF NOT EXISTS %s (
 		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 		uuid VARCHAR(36) NOT NULL, 
-		content LONGTEXT NOT NULL,
+		content TEXT NOT NULL,
 		title VARCHAR(255) NOT NULL,
 		author VARCHAR(255),
 		language VARCHAR(255),

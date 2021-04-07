@@ -3433,3 +3433,22 @@ created by net/http.(*Server).Serve
 2021/03/20 00:54:55 server.go:30: listen tcp :8080: bind: address already in use
 2021/03/20 00:55:04 server.go:25: Defaulting to port 8080
 2021/03/20 00:55:04 server.go:28: Listening on port 8080
+2021/03/20 01:22:07 server.go:25: Defaulting to port 8080
+2021/03/20 01:22:07 server.go:28: Listening on port 8080
+2021/03/20 01:41:33 server.go:25: Defaulting to port 8080
+2021/03/20 01:41:33 server.go:28: Listening on port 8080
+2021/03/21 23:32:42 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:32:52 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:33:18 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:33:55 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:35:19 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:37:16 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:37:25 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:39:14 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:39:16 server.go:3139: http: superfluous response.WriteHeader call from github.com/k88t76/CodeArchives-server/controllers/archive.postArchive (archive.go:61)
+2021/03/21 23:41:06 server.go:25: Defaulting to port 8080
+2021/03/21 23:41:06 server.go:28: Listening on port 8080
+2021/03/21 23:43:01 server.go:25: Defaulting to port 8080
+2021/03/21 23:43:01 server.go:28: Listening on port 8080
+2021/03/21 23:45:39 server.go:25: Defaulting to port 8080
+2021/03/21 23:45:39 server.go:28: Listening on port 8080
