@@ -50,9 +50,9 @@ func init() {
 		CREATE TABLE IF NOT EXISTS %s (
 		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 		uuid VARCHAR(36) NOT NULL, 
-		content TEXT NOT NULL,
+		content LONGTEXT NOT NULL,
 		title VARCHAR(255) NOT NULL,
-		author VARCHAR(255),
+		author VARCHAR(255) NOT NULL,
 		language VARCHAR(255),
 		created_at VARCHAR(255))`, tableNameArchives)
 	db.Exec(cmd)
